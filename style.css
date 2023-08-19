@@ -8,3 +8,81 @@ Version: 1.0
 Tags: photography,pictures, openclassrooms
 Text Domain: Nmota
 */
+
+
+/* Style du header */
+
+
+
+  /* Style pour le logo */
+  .logo {
+
+   height: auto;
+    text-decoration: none;
+  }
+.logo a{
+    padding-top: 20px;
+    display: block;
+}
+
+ 
+  /* Style pour le menu */
+
+  #nav{
+    display: flex;
+    justify-content: space-between;
+    padding:10px 20px;
+
+  }
+  .header {
+    display: flex;
+   margin-right:50px;
+    gap: 20px;
+
+  }
+.header li{
+    list-style-type:none;
+   color: black;
+   display:flex;
+   text-align: end;
+}
+
+.header a {
+    color: black;
+    text-decoration: none;
+    font-size:20px;
+    font-family: "Space Mono", monospace, sans-serif;
+    text-transform: uppercase;
+}
+
+
+/*FOOTER*/
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  padding:10px 20px;
+
+}
+
+#menu-footer {
+  display: flex;
+   margin-right:50px;
+    gap: 30px;
+    justify-content: center;
+}
+
+#menu-footer a {
+  color: black;
+  text-decoration: none;
+  font-size:20px;
+  font-family: "Space Mono", monospace, sans-serif;
+  text-transform: uppercase;
+
+}
+
+.line{
+  border: none;
+    border-top: 1px solid black;
+    width: 100%;
+}
