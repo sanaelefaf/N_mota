@@ -14,6 +14,7 @@
 </header>
 <h1>PHOTOGRAPHE EVENT</h1>
 
+
 <footer>
 <?php get_footer(); ?>
 </footer>

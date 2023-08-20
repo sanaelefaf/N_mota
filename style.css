@@ -86,3 +86,57 @@ Text Domain: Nmota
     border-top: 1px solid black;
     width: 100%;
 }
+
+/*modale*/
+
+/* Style pour la modale */
+.contact{
+  width: 100%;
+  height: auto;
+}
+.close {
+  cursor: pointer;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  animation: fade 3s forwards ease-in-out;
+
+}
+
+@keyframes fade{
+  
+  0%{ opacity: 0;
+    transform: translateY(3px);
+  }
+    100%{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+  }
+
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+ 
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  max-width: 90%;
+  height: 95%;
+}
+
+#wpforms-form-45 {
+padding: 20px;
+}

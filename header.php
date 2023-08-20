@@ -17,11 +17,23 @@
             
         </a>
     </div> 
+    <div class="nav">
     <?php
     wp_nav_menu( array(
         'theme_location' => 'header', // Emplacement du menu défini dans functions.php
         'menu_class'     => 'header', // Classe CSS du menu
     ) );
     ?>
+
+
+<div id="contactModal" class="modal">
+    <?php get_template_part( 'templates_part/modale' ); ?>
+</div>
+</div>
+   
+    
+</li>
+</ul>
+
     </nav>
 </header>
