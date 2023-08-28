@@ -9,12 +9,30 @@ Tags: photography,pictures, openclassrooms
 Text Domain: Nmota
 */
 
+h1 {
+  text-align: center;
+  -webkit-text-stroke: 2px white;
+  -webkit-text-fill-color: transparent;
+  padding: 28% 10% 30%;
+  font-size: 100px;
+  font-family: "Space Mono", monospace, sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  margin-top: inherit;
+}
+
+.event {
+  margin: -8px;
+  padding: 0;
+  background-image: url('img/nathalie-11.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 962px;
+  margin-bottom: 100px;
+}
 
 /* Style du header */
 
-
-
-  /* Style pour le logo */
   .logo {
 
    height: auto;
@@ -85,6 +103,7 @@ Text Domain: Nmota
   border: none;
     border-top: 1px solid black;
     width: 100%;
+    margin:  30px -8px 0px ;
 }
 
 /*modale*/
@@ -96,6 +115,7 @@ Text Domain: Nmota
 }
 .close {
   cursor: pointer;
+ 
 }
 
 .modal {
@@ -114,7 +134,7 @@ Text Domain: Nmota
 @keyframes fade{
   
   0%{ opacity: 0;
-    transform: translateY(3px);
+    transform: translateY(1px);
   }
     100%{
       opacity: 1;
@@ -139,4 +159,46 @@ Text Domain: Nmota
 
 #wpforms-form-45 {
 padding: 20px;
+}
+
+/*FILTRE*/
+
+/* Styles pour les filtres */
+.filters {
+  margin-bottom: 20px;
+}
+
+.filters label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.filters select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-right: 20px;
+}
+
+#sort {
+position: absolute;
+right: 0;
+}
+/* Styles pour la liste des photos */
+#photo-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.photo-item {
+  width: calc(33.33% - 20px);
+  margin: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.photo-item img {
+  max-width: 100%;
+  height: auto;
 }

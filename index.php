@@ -12,9 +12,15 @@
 <header>
 <?php get_header(); ?>
 </header>
+<div class="event">
 <h1>PHOTOGRAPHE EVENT</h1>
+</div>
+<div >
+
+<?php echo get_template_part( 'single_photos' ); ?>
 
 
+</div>
 <footer>
 <?php get_footer(); ?>
 </footer>

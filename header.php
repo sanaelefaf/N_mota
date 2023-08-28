@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nathalie Mota</title>
     <?php wp_head() ?>
+    <script>
+    var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
+</script>
+</head>
    
 <body>
 <header>
