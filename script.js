@@ -36,22 +36,21 @@ document.addEventListener("DOMContentLoaded", function () {
   //PHOTOS
 
 
-// Votre code JavaScript continue ici
 jQuery(document).ready(function($) {
   var page = 1; // Numéro de page pour la pagination
 
   // Fonction pour charger les photos en fonction des filtres
   function loadPhotos() {
-      const category = $("#category").val();
+      const categorie = $("#categorie").val();
       const format = $("#format").val();
       const sort = $("#sort").val();
-
+   //requete ajax vers ajaxurl
       $.ajax({
           url: ajaxurl,
           type: "GET",
           data: {
               action: "load_photos",
-              category: category,
+              categorie: categorie,
               format: format,
               sort: sort,
               page: page,

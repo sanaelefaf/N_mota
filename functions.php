@@ -65,59 +65,8 @@ function nmota_theme_settings() {
     echo '</form>';
 }
 
-//PHOTOS //
 
-function load_photos() {
-    $type = $_GET['type'];
-    $category = $_GET['categorie'];
-    $format = $_GET['format'];
-    $sort = $_GET['sort'];
-    $page = $_GET['page'];
+// Inclusion du fichier des fonctions AJAX
+require get_template_directory() . '/custom/function-ajax.php'; 
 
-    $args = array(
-        'post_type' => 'photo', // Remplacez par le nom de votre type de contenu personnalisé
-        'posts_per_page' => 12,
-        'paged' => $page, // Numéro de page pour la pagination
-        // Ajoutez d'autres
-    );
-    if ($category) {
-        $args['taxonomie_name'] = $category;
-    }
-    // Ajoutez la partie de requête pour le champ personnalisé 'format'
-    if ($format) {
-        $args['meta_query'] = array(
-            array(
-                'key' => 'format', // Remplacez par le nom du champ personnalisé ACF
-                'value' => $format,
-                'compare' => '=',
-            ),
-        );
-    }
-
-    $query = new WP_Query($args);
-
-    if ($query->have_posts()) {
-        while ($query->have_posts()) {
-            $query->the_post();
-            echo '<div id="photo">';
-            the_title();
-            the_content();
-            the_post_thumbnail('thumbnail');
-            // Affichage du champ ACF "Type d'événement"
-            $photo_format= get_field('format'); // Remplacez par le nom de votre champ ACF
-            if ($photo_format) {
-                echo '<p>Type d\'événement : ' . esc_html($photo_format) . '</p>';
-            }
-            echo '</div>';
-        }
-        wp_reset_postdata();
-    } else {
-        echo 'Aucune photo trouvée.';
-    }
-
-    die(); // Assurez-vous de terminer l'exécution
-}
-
-add_action('wp_ajax_load_photos', 'load_photos');
-add_action('wp_ajax_nopriv_load_photos', 'load_photos');
 
