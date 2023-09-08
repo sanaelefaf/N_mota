@@ -153,17 +153,49 @@ h1 {
  
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  max-width: 90%;
-  height: 95%;
+  max-width: 40%;
+  height: auto;
+  border: 5px solid black;
 }
 
 #wpforms-form-45 {
 padding: 20px;
 }
+.wpforms-container #wpforms-form-45 .wpforms-field-container .wpforms-field input{
+margin: 0 auto;
+height: 30px;
+width:200px
+}
+.wpforms-container #wpforms-form-45 .wpforms-field-container .wpforms-field textarea {
+  width:200px;
+  margin: 0 auto;
+}
+
+.wpforms-container #wpforms-form-45 .wpforms-field-container .wpforms-field .wpforms-field-label {
+margin-left: 33%;
+margin-bottom: inherit;
+}
+
+.wpforms-container #wpforms-form-45 .wpforms-field-container {
+  margin-top: -40px;
+
+}
+
+.wpforms-container-full .wpforms-form .wpforms-submit-container{
+
+display: flex;
+}
+ .wpforms-container-full  #wpforms-form-45 .wpforms-submit-container #wpforms-submit-45  {
+margin: 0 auto;
+width: 200px;
+background-color: #D8D8D8;
+color: black;
+}
 
 /*FILTRE*/
 
 /* Styles pour les filtres */
+
 .filters {
   margin-bottom: 20px;
 }
@@ -175,10 +207,15 @@ padding: 20px;
 
 .filters select {
   padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  border: 1px solid black;
+  border-radius: 10px;
   margin-right: 20px;
+  width: 260px;
+  height: 43px;
+
 }
+
+
 
 #sort {
 position: absolute;
@@ -190,15 +227,102 @@ right: 0;
   flex-wrap: wrap;
 }
 
-.photo-item {
-  width: calc(33.33% - 20px);
-  margin: 10px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+
+/* grille photos */
+
+
+/* CSS pour chaque élément de la grille (2 colonnes) */
+/* CSS pour la grille */
+.photo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.photo-item img {
-  max-width: 100%;
-  height: auto;
+/* CSS pour chaque élément de la grille (2 colonnes) */
+.photo {
+  flex: 0 0 calc(50% - 10px); /* 50% de largeur pour deux colonnes côte à côte avec un espace de 10px */
+  margin-bottom: 20px; /* Espacement entre les éléments de la grille */
+  box-sizing: border-box; /* marges dans le calcul de la largeur */
+  position: relative; 
+}
+
+
+.photo img {
+  min-width: 100%;
+  min-height: 100%; 
+  max-width: none;
+  max-width: none;/*les images ne dépassent pas la largeur de leur conteneur */
+  width: 564px; 
+  height: 495px; 
+  overflow: hidden; /* Masquer le contenu dépassant du cadre */
+  margin: 0 auto; 
+  object-fit: cover; 
+
+}
+
+/*afficher plus*/
+#photo-div #load-more-container {
+display: flex;
+flex-direction: row;
+justify-content: center;
+
+}
+
+#load-more {
+  width: 275px;
+height: 50px;
+border: none;
+border-radius: 2px;
+cursor: pointer;
+}
+
+/*lightbox*/
+
+
+/* Styles pour l'assombrissement au survol */
+.photo-image {
+  position: relative;
+}
+
+.image-container {
+  position: relative;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Couleur de l'assombrissement */
+  opacity: 0; /* Initialement transparent */
+  transition: opacity 0.3s ease-in-out;
+}
+
+.image-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0; /* Initialement invisible */
+  transition: opacity 0.3s ease-in-out;
+  font-size: 24px;
+  color: #fff; /* Couleur de l'icône */
+}
+
+/* Styles pour l'icône "plein écran" au survol */
+.photo-image:hover .image-overlay {
+  opacity: 1; /* Assombrir l'image au survol */
+}
+
+.photo-image:hover .image-icon {
+  opacity: 1; /* Afficher l'icône au survol */
+  cursor: pointer;
+}
+
+#categorie option {
+  background-color: red;
+
 }
