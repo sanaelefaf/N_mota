@@ -70,6 +70,9 @@ function nmota_theme_settings() {
     echo '</form>';
 }
 
+add_theme_support('post-thumbnails'); // Activation des images à la une
+add_post_type_support('page', 'excerpt'); // Activation des extraits pour les pages
+add_post_type_support('page', 'page-attributes'); // Activation des attributs de page
 
 // Inclusion du fichier des fonctions AJAX
 require get_template_directory() . '/custom/function-ajax.php'; 

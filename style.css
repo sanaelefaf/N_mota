@@ -24,7 +24,7 @@ h1 {
 .event {
   margin: -8px;
   padding: 0;
-  background-image: url('img/nathalie-11.jpeg');
+  background-image: url('assets/images/nathalie-11.jpeg');
   background-size: cover;
   background-position: center;
   height: 962px;
@@ -277,6 +277,157 @@ border: none;
 border-radius: 2px;
 cursor: pointer;
 }
+/* apparenté*/
+
+/* Conteneur principal */
+
+.contactBtn {
+  display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.containerContact {
+  display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 90px;
+}
+.containerSingle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+
+.contentPhoto img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Icône "plein écran" au survol */
+.contentPhoto:hover::after {
+    content: '\f065'; /* Code Unicode de l'icône plein écran (vous pouvez changer cela) */
+    font-family: FontAwesome; /* Utilisez la police d'icônes FontAwesome ou une autre de votre choix */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+
+/* Bloc 50% de largeur à gauche pour les infos de la photo */
+.detailsPhoto {
+  flex: 1;
+
+  background-color: #fff;
+
+  border-radius: 5px;
+
+  align-self: end;
+}
+.infosPhoto {
+  font-family: "Space Mono", monospace, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+/* Titre dans le bloc des infos */
+.detailsPhoto h2 {
+  font-size: 66px;
+  margin-bottom: 10px;
+  font-family: "Space Mono", monospace, sans-serif;
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: 400;
+
+}
+
+/* Paragraphes dans le bloc des infos */
+.detailsPhoto p {
+ 
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+/* Bloc 50% de largeur à droite pour la photo */
+.ContentPhoto {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Icône "plein écran" au survol */
+.photo:hover::after {
+  content: '\f065'; /* Code Unicode de l'icône plein écran (vous pouvez changer cela) */
+  font-family: FontAwesome; /* Utilisez la police d'icônes FontAwesome ou une autre de votre choix */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Bloc de 118px de hauteur en dessous pour les interactions */
+.interactions {
+  flex: 0 0 100%;
+  height: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+
+  border-top: none;
+  padding: 10px 20px;
+}
+
+/* Style du lien de contact */
+.contactLink {
+  text-decoration: none;
+  background-color: grey
+  ;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  
+}
+
+
+/* Style des liens de navigation */
+.navigationLinks {
+  display: flex;
+  align-items: center;
+}
+
+.navigationLinks a {
+  text-decoration: none;
+  
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+/* Style des miniatures des photos de navigation */
+.navigationLinks img {
+  max-height: 40px;
+  max-width: 60px;
+}
+
+.navigationArrows{
+  width: 100%;
+  text-align: right;
+}
+
+
 
 /*lightbox*/
 
@@ -325,4 +476,9 @@ cursor: pointer;
 #categorie option {
   background-color: red;
 
+}
+
+.containerPrincipalSingle {
+  margin: 20px; /* Vous pouvez ajuster la valeur selon vos préférences */
+  padding: 10px; /* Si nécessaire, ajoutez également du padding */
 }
