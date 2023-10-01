@@ -1,18 +1,31 @@
-<?php
+<?php 
 /*
 Template Name: Single Photo
 */
-get_header();
 ?>
+<!DOCTYPE html> 
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <title>Nathalie motat</title>
+    <?php wp_head(); ?>
+<header>
+<?php get_header();
 
+?>
+</header>
+<body>
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
     <?php
     // Get specific article data
     $photo_id = get_the_ID();
-    $photo_url = get_field('photo'); // URL of the photo from ACF
+    $photo_url = get_post_meta($post->ID, 'photo', true);
     $type = get_field('type'); // Type from ACF
-    $reference = get_field('référence'); // Reference from ACF
+    $reference = get_field('reference'); // Reference from ACF
     $taxo_categorie = get_the_terms($photo_id, 'categorie');
     $taxo_format = get_the_terms($photo_id, 'format');
     $taxo_annee = get_the_terms($photo_id, 'annee');
@@ -28,6 +41,7 @@ get_header();
                     <p><?php echo 'CATÉGORIE: ' . esc_html($taxo_categorie[0]->name) . '<br>'; ?></p>
                     <p><?php echo 'FORMAT: ' . esc_html($taxo_format[0]->name) . '<br>'; ?></p>
                     <p><?php echo 'TYPE: ' . esc_html($type) . '<br>'; ?></p>
+                    <p> <hr class="singleline"></p>
                 </div>
             </div>
 
@@ -39,15 +53,16 @@ get_header();
                 <?php the_content(); // Photo content ?>
             </div>
             </a>
-
+        
+            </div>
         <div class="contactBtn">
             <div class="containerContact">
                 <p> Cette photo vous intéresse ? </p>
                 <button type="button" class="contactLink" data-reference="<?php echo esc_attr($reference); ?>">Contact
                 </button>
             </div>
-        </div>
-    </div>
+      
+  
 
     <div class="navigationArrows">
         <?php
@@ -89,10 +104,16 @@ get_header();
             </div>
         <?php endif; ?>
     </div>
+    </div>
+    <div class="ligne">
+      <hr class="singleline">
+      </div>
+
     <p class="imgAppTitle">Vous aimerez aussi</p>
+<div class="Principal">
 <div class="containerPrincipalImg">
     <?php
-    // Récupérez les catégories de la photo actuelle
+   
     $current_photo_categories = wp_get_post_terms($photo_id, 'categorie', array('fields' => 'ids'));
 
     $args = array(
@@ -102,9 +123,9 @@ get_header();
         'tax_query' => array(
             array(
                 'taxonomy' => 'categorie',
-                'field' => 'id', // Vous recherchez les IDs de la taxonomie ici
-                'terms' => $current_photo_categories, // Utilisez les catégories de la photo actuelle
-                'operator' => 'IN', // Assurez-vous que les catégories correspondent
+                'field' => 'id', 
+                'terms' => $current_photo_categories, 
+                'operator' => 'IN', 
             ),
         ),
     );
@@ -114,9 +135,13 @@ get_header();
     if ($related_photos->have_posts()) :
         while ($related_photos->have_posts()) : $related_photos->the_post();
     ?>
-            <div class="containerImg">
-    <a href="<?php echo esc_url(get_permalink()); ?>" data-photo-url="<?php echo esc_url(get_field('photo')); ?>" data-type="<?php echo esc_attr(get_field('type')); ?>" data-reference="<?php echo esc_attr(get_field('référence')); ?>">
+           
+        <div class="photo " data-photo-id="<?php echo $photo_id; ?>" data-photo-url="<?php echo $photo_url; ?>" data-categorie="<?php echo esc_html($taxo_categorie[0]->name)?> " data-reference="<?php echo esc_attr($reference); ?>"> 
+   
+        <a href="<?php echo esc_url(get_permalink()); ?>" data-photo-url="<?php echo esc_url(get_field('photo')); ?>" data-type="<?php echo esc_attr(get_field('type')); ?>" data-reference="<?php echo esc_attr(get_field('référence')); ?>">
         <?php the_content(); ?>
+
+        <?php get_template_part( 'template_parts/photo_block' ); ?>
     </a>
 </div>
 
@@ -128,13 +153,17 @@ get_header();
     endif;
     ?>
 </div>
-
+</div>
+<div class="button">
     <button type="button" class="buttonAllPhoto">
         <a href="<?php echo esc_url(home_url()); ?>#galleryPhoto">Toutes les photos</a>
     </button>
-
+    </div>
 <?php endwhile; else : ?>
     <p>Aucun article trouvé.</p>
 <?php endif; ?>
-
+<footer>
 <?php get_footer(); ?>
+</footer>
+</body>
+</html>

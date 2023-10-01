@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
 <div class="event">
     <h1>PHOTOGRAPHE EVENT</h1>
 </div>
-<div>
+<div class="content">
     <div class="filters">
         <form action="" method="get">
             <?php
@@ -69,12 +69,15 @@
         $format = isset($_GET['format']) ? $_GET['format'] : '';
         $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
         $page = isset($_GET['page']) ? $_GET['page'] : 1; // Page par défaut : 1
+       
+
 
         $args = array(
             'post_type' => 'photos',
             'posts_per_page' => 12,
             'paged' => $page,
-            
+           
+   
         );
 
         $tax_queries = array();
@@ -103,7 +106,7 @@
             $args['order'] = 'ASC';
         }
 
-        // Triez par date de publication
+        //  date de publication
         $args['orderby'] = 'date';
 
         $query = new WP_Query($args);
@@ -112,32 +115,55 @@
             while ($query->have_posts()) {
                 $query->the_post();
                 $photo_id = get_the_ID();
-                $photo_url = get_field('photo'); // l'URL de la photo depuis ACF
                 $type = get_field('type'); // le type depuis ACF
-                $reference = get_field('référence'); // la référence depuis ACF
+                $reference = get_field('reference'); // la référence depuis ACF
                 $already_displayed_posts[] = get_the_ID();
+                $photo_url = get_post_meta($photo_id, 'photo', true);
+               
 
-                //  l'ID de la page d'accueil
-        $home_page_id = get_option('page_on_front');
-
-        //  l'URL de la page d'accueil en utilisant l'ID
-        $home_page_url = get_permalink($home_page_id);
-                //  lien vers le modèle photo-post.php avec l'ID de l'article en tant que paramètre
+                $home_page_id = get_option('page_on_front');
+               
+            
+                $taxo_categorie = get_the_terms($photo_id, 'categorie');
+                $home_page_url = get_permalink($home_page_id);
+             
                 $photo_permalink = get_permalink($photo_id);
+        ?>
                 
-                echo '<a href="' . $photo_permalink . '" class="photo-link">';
-                echo '<div class="photo" data-photo-id="' . $photo_id . '" data-photo-url="' . $photo_url . '" data-type="' . $type . '" data-reference="' . $reference . '">';
-                echo get_the_content(); // Contenu de la photo
-                echo '</div>';
-                echo '</a>';
+             
+                <div class="photo" data-photo-id="<?php echo $photo_id; ?>" data-photo-url="<?php echo $photo_url; ?>" data-categorie="<?php echo esc_html($taxo_categorie[0]->name)?> " data-reference="<?php echo esc_attr($reference); ?>">
+
+
+                    <a href="<?php echo $photo_permalink; ?>" class="photo-link">
+                        <?php the_content(); // Contenu de la photo ?>
+
+                        <div class="photo-details">
+
+                            <div class="photo-title"><?php the_title(); ?></div> 
+                           
+
+                                <div class="photo-category"><?php echo esc_html($taxo_categorie[0]->name)?></div> 
+                         
+
+                            <div class="eye-icon">
+                                <i class="fa fa-eye"></i>
+                            </div>
+
+                            <div class="fullscreen-icon" data-photo-url="<?php echo esc_url($photo_url); ?>" data-type="<?php echo esc_attr($type); ?>" data-reference="<?php echo esc_attr($reference); ?>" data-categorie="<?php echo isset($current_photo_category) ? esc_attr($current_photo_category->name) : ''; ?>">
+                                <i class="fa fa-expand"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+        <?php
             }
             wp_reset_postdata();
         } else {
             echo 'Aucune photo trouvée.';
         }
         ?>
-        
     </div>
+    
 </section>
 
     

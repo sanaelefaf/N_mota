@@ -33,87 +33,103 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  //PHOTO
+  jQuery(document).ready(function($) {
+    // Fonction pour récupérer la valeur d'un cookie par son nom
+    function getCookie(cookieName) {
+        var name = cookieName + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var cookieArray = decodedCookie.split(';');
+        for (var i = 0; i < cookieArray.length; i++) {
+            var cookie = cookieArray[i];
+            while (cookie.charAt(0) === ' ') {
+                cookie = cookie.substring(1);
+            }
+            if (cookie.indexOf(name) === 0) {
+                return cookie.substring(name.length, cookie.length);
+            }
+        }
+        return "";
+    }
 
-    //PHOTOS
+    var page = 1; // Numéro de page pour la pagination
+    var loading = false; // Variable pour éviter les chargements multiples
 
+    // Fonction pour charger les photos en fonction des filtres
+    function loadPhotos() {
+        if (loading) {
+            return; // Ne chargez pas si une requête est déjà en cours
+        }
 
-jQuery(document).ready(function($) {
-  var page = 1; // Numéro de page pour la pagination
-  var offset = 0; // Offset pour paginer manuellement
-  var loading = false; // Variable pour éviter les chargements multiples
+        const categorie = $("#categorie").val();
+        const format = $("#format").val();
+        const sort = $("#sort").val();
+        var alreadyDisplayedPosts = getCookie('already_displayed_posts').split(',');
 
+        loading = true; // Marquer le chargement en cours
 
-  // Fonction pour charger les photos en fonction des filtres
-  function loadPhotos() {
-    if (loading) {
-      return; // Ne chargez pas si une requête est déjà en cours
-  }
-      const categorie = $("#categorie").val();
-      const format = $("#format").val();
-      const sort = $("#sort").val();
+        // Requête AJAX vers le serveur
+        $.ajax({
+            url: ajaxurl,
+            type: "GET",
+            data: {
+                action: "filter_photos",
+                categorie: categorie,
+                format: format,
+                sort: sort,
+                page: page,
+                already_displayed_posts: alreadyDisplayedPosts
+            },
+            success: function(response) {
+                $("#photo-list").append(response); 
+                page++; // Augmenter le numéro de page pour la prochaine requête
+                loading = false; // Marquer le chargement comme terminé
 
-      loading = true; // Marquer le chargement en cours
+                // Mettez à jour les cookies pour suivre les articles déjà affichés
+                alreadyDisplayedPosts = alreadyDisplayedPosts.concat(response.split(','));
+                document.cookie = 'already_displayed_posts=' + alreadyDisplayedPosts.join(',');
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log("Erreur lors du chargement des photos : " + errorThrown);
+                loading = false; 
+            }
+        });
+    }
 
-   //requete ajax vers ajaxurl
-      $.ajax({
+    // Fonction pour filtrer les photos en fonction des critères de filtre
+    function filterPhotos() {
+        page = 1; // Réinitialiser le numéro de page lorsque les filtres changent
+        $("#photo-list").empty(); // Vider la liste actuelle
+        loadPhotos(); // Charger les photos avec les nouveaux filtres
+// Charger les photos avec les nouveaux filtres
+    }
+
+    // Gestionnaire d'événement pour le changement des filtres
+    $("#categorie, #format, #sort").change(function() {
+        filterPhotos();
+    });
+
+    // Gestionnaire d'événement pour le bouton "Afficher plus"
+    $("#load-more").click(function(e) {
+        e.preventDefault();
+        // Appel AJAX pour load_photos
+        $.ajax({
           url: ajaxurl,
           type: "GET",
           data: {
               action: "load_photos",
-              categorie: categorie,
-              format: format,
-              sort: sort,
-              page: page,
-              offset: offset,
+              categorie: $("#categorie").val(),
+              format: $("#format").val(),
+              sort: $("#sort").val(),
+              page: page
           },
           success: function(response) {
-            const $response = $(response); // Convertit la réponse en un objet jQuery
-                
-                // Parcours de chaque élément .photo-item dans la réponse
-                $response.find(".photo-info").each(function() {
-                    const $photoInfo= $(this);
-                    const photoUrl = $photoInfo.data("photo-url"); // Récupère la valeur de l'attribut data-photo-url
-                    const photoPermalink = $photoInfo.data("photo-permalink"); // Obtenez le lien permanent de la photo
-                    $photoItem.attr("data-photo-permalink", photoPermalink);
-
-                    const $photoLink = $("<a>").attr("href", photoPermalink);
-
-                    // Créez un élément de photo et placez-le à l'intérieur de la balise <a>
-                    const $photoItem = $("<div>").addClass("photo");
-                    $photoLink.append($photoItem);
-                    
-                    // Faites quelque chose avec l'URL de la photo, par exemple, l'afficher dans la console
-                    console.log("URL de la photo : " + photoUrl);
-                });
-
               $("#photo-list").append(response);
-              page++; // Augmenter le numéro de page pour la prochaine requête
-              offset += 12; 
-              loading = false;
+              page++;
           },
           error: function(xhr, textStatus, errorThrown) {
               console.log("Erreur lors du chargement des photos : " + errorThrown);
-              loading = false;
           }
-      });
-  }
-
-  // Gestionnaire d'événement pour le changement des filtres
-  $("#category, #format, #sort").change(function() {
-      page = 1; // Réinitialiser le numéro de page lorsque les filtres changent
-      offset = 0; // Réinitialiser l'offset
-      $("#photo-list").empty(); // Vider la liste actuelle
-      loadPhotos();
-  });
-
-  // Gestionnaire d'événement pour le bouton "Voir plus"
-  $("#load-more").click(function(e) {
-      e.preventDefault();
-      loadPhotos();
-  });
-
-  // Appel initial pour charger les photos
-  loadPhotos();
+        });  
+    });
 });
-
-

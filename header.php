@@ -17,7 +17,7 @@
     <nav id="nav">
     <div class="logo">
         <a href="<?php echo esc_url(home_url('/')); ?>">
-        <img class="cat"src="<?php echo get_template_directory_uri() . '/img/Nathalie_Mota.png'; ?>" alt="">
+        <img class="cat"src="<?php echo get_template_directory_uri() . '/assets/images/Nathalie_Mota.png'; ?>" alt="">
             
         </a>
     </div> 
@@ -31,7 +31,7 @@
 
 
 <div id="contactModal" class="modal">
-    <?php get_template_part( 'templates_part/modale' ); ?>
+    <?php get_template_part( 'template_parts/modale' ); ?>
 </div>
 </div>
    

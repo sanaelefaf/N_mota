@@ -1,68 +1,100 @@
-jQuery(document).ready(function($) {
-    // Fonction pour ouvrir la lightbox avec les données
-    function openLightbox(photoIndex) {
-        const photo = photos[photoIndex];
-        $('#lightbox-image').attr('src', photo.url);
-        $('#lightbox-title').text(photo.name);
-        $('#lightbox-overlay').show();
-        currentPhotoIndex = photoIndex;
-    }
+// Définissez la fonction setupLightbox en haut de votre fichier JavaScript
+function setupLightbox() {
+    const lightboxContainer = document.querySelector(".containerLightbox");
+    const lightboxImageContainer = lightboxContainer.querySelector(".lightbox-image-container");
+    const lightboxReference = lightboxContainer.querySelector(".reference");
+    const lightboxCategorie = lightboxContainer.querySelector(".categorie");
+    const lightboxClose = lightboxContainer.querySelector(".close");
+    const fullscreenIcons = document.querySelectorAll(".fa.fa-expand"); // Utilisez la classe "open-lightbox-icon"
+    const photoContainers = document.querySelectorAll(".photo"); // Les conteneurs de vos photos
+    const prevButton = lightboxContainer.querySelector(".previous");
+    const nextButton = lightboxContainer.querySelector(".next");
+    const lightboxTriggerElements = document.querySelectorAll("[data-lightbox-trigger='true']");
 
-    // Fonction pour fermer la lightbox
-    function closeLightbox() {
-        $('#lightbox-overlay').hide();
-    }
+    // Vérifiez si les éléments existent avant d'exécuter le code
+    if (
+        lightboxContainer &&
+        lightboxImageContainer &&
+        lightboxReference &&
+        lightboxCategorie &&
+        lightboxClose &&
+        fullscreenIcons.length > 0 &&
+        photoContainers.length > 0 &&
+        prevButton &&
+        nextButton
+    ) {
+        let currentPhotoIndex = 0; // Index de la photo actuellement affichée
 
-    // Tableau pour stocker les informations sur les photos
-    var photos = [];
+        function openLightbox(photoContainer) {
+            const imageId = photoContainer.getAttribute("data-photo-id");
+            const imageUrl = photoContainer.getAttribute("data-photo-url");
+            const reference = photoContainer.getAttribute("data-reference");
+            const categorie = photoContainer.getAttribute("data-categorie");
 
-    // Index de la photo actuellement affichée
-    var currentPhotoIndex = 0;
+            // Récupérer le contenu de la photo
+            const photoContent = photoContainer.querySelector("img");
 
-    // Écoutez le clic sur les images générées via AJAX
-    $(document).on('click', '.photo-image.lightbox-trigger', function() {
-        const photoId = $(this).data('photo-id');
-        const photoIndex = photos.findIndex(photo => photo.id === photoId);
-        if (photoIndex !== -1) {
-            openLightbox(photoIndex);
+            // Mettez à jour la source de l'image, la référence et la catégorie
+            const imageElement = document.createElement("img");
+            imageElement.src = imageUrl + "?photoId=" + imageId;
+            lightboxImageContainer.innerHTML = ''; // Effacez le contenu précédent
+            lightboxImageContainer.appendChild(imageElement);
+            lightboxReference.textContent = reference;
+            lightboxCategorie.textContent = categorie;
+
+            // Mettez à jour le contenu de la lightbox avec le contenu de la photo
+            if (photoContent) {
+                const lightboxImageContainer = lightboxContainer.querySelector(".lightbox-image-container");
+                lightboxImageContainer.innerHTML = ''; // Effacez le contenu précédent
+                lightboxImageContainer.appendChild(photoContent);
+            }
+
+            // Ajoutez la classe "open" pour afficher la lightbox
+            lightboxContainer.classList.add("open");
         }
-    });
 
-    // Écoutez le clic sur le bouton de fermeture
-    $('#lightbox-close').on('click', function() {
-        closeLightbox();
-    });
-
-    // Écoutez le clic sur le bouton précédent
-    $('#lightbox-previous').on('click', function() {
-        if (currentPhotoIndex > 0) {
-            openLightbox(currentPhotoIndex - 1);
+        function showPrevPhoto() {
+            currentPhotoIndex--;
+            if (currentPhotoIndex < 0) {
+                currentPhotoIndex = photoContainers.length - 1;
+            }
+            const prevPhotoContainer = photoContainers[currentPhotoIndex];
+            openLightbox(prevPhotoContainer);
         }
-    });
 
-    // Écoutez le clic sur le bouton suivant
-    $('#lightbox-next').on('click', function() {
-        if (currentPhotoIndex < photos.length - 1) {
-            openLightbox(currentPhotoIndex + 1);
+        function showNextPhoto() {
+            currentPhotoIndex++;
+            if (currentPhotoIndex >= photoContainers.length) {
+                currentPhotoIndex = 0;
+            }
+            const nextPhotoContainer = photoContainers[currentPhotoIndex];
+            openLightbox(nextPhotoContainer);
         }
-    });
 
-    
-    // Appel AJAX pour récupérer les données des photos
-    $.ajax({
-        url: ajaxurl,
-        type: "GET",
-        data: {
-            action: "get_photos_data"
-        },
-        success: function(response) {
-            // Ajoutez les photos à votre tableau à partir des données JSON
-            response.forEach(function(photoData) {
-                photos.push(photoData);
+        fullscreenIcons.forEach(function (icon) {
+            icon.addEventListener("click", function (event) {
+                event.preventDefault();
+               
+                const photoContainer = icon.closest(".photo");
+                if (photoContainer) {
+                    const reference = photoContainer.getAttribute("data-reference"); 
+                    const categorie = photoContainer.getAttribute("data-categorie"); // Récupérez la catégorie
+                    openLightbox(photoContainer, reference, categorie);
+                }
+               
             });
-        },
-        error: function(xhr, textStatus, errorThrown) {
-            console.log("Erreur lors du chargement des données des photos : " + errorThrown);
-        }
-    });
-});
+        });
+
+        prevButton.addEventListener("click", showPrevPhoto);
+        nextButton.addEventListener("click", showNextPhoto);
+
+        lightboxClose.addEventListener("click", function () {
+            lightboxContainer.classList.remove("open");
+
+            
+        });
+    }
+}
+
+// Appel à la fonction setupLightbox au chargement du document
+document.addEventListener("DOMContentLoaded", setupLightbox);
