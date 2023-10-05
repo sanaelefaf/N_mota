@@ -13,7 +13,7 @@ function load_photos() {
 
 $args = array(
     'post_type' => 'photos',
-    'posts_per_page' => 12,
+    'posts_per_page' => 8,
     'paged' => 2, // Utilisez le numéro de page actuel pour la pagination
     'order' => 'DESC',
     'post__not_in' => $already_displayed_posts,
@@ -71,17 +71,11 @@ if ($query->have_posts()) {
         setcookie('already_displayed_posts', implode(',', $already_displayed_posts), time() + 3600, '/'); // Stocker les ID sous forme de chaîne séparée par des virgules
 
         ?>
-        <div class="photo" data-photo-id="<?php echo $photo_id; ?>" data-photo-url="<?php echo $photo_url; ?>" data-categorie="<?php echo esc_html($taxo_categorie[0]->name)?> " data-reference="<?php echo esc_attr($reference); ?>" data-lightbox-trigger="true">
-            <a href="<?php echo $photo_permalink; ?>" class="photo-link">
-                <?php the_content(); // Contenu de la photo ?>
-                <div class="photo-details">
-                    <div class="photo-title"><?php the_title(); ?></div>
-                    <div class="photo-category"><?php echo esc_html($taxo_categorie[0]->name)?></div>
-                    <div class="eye-icon"><i class="fa fa-eye"></i></div>
-                    <div class="fullscreen-icon" data-photo-url="<?php echo esc_url($photo_url); ?>" data-type="<?php echo esc_attr($type); ?>" data-reference="<?php echo esc_attr($reference); ?>" data-categorie="<?php echo isset($current_photo_category) ? esc_attr($current_photo_category->name) : ''; ?>"><i class="fa fa-expand"></i></div>
-                </div>
-            </a>
-        </div>
+      <?php
+
+get_template_part('template_parts/photo_block');
+?>
+        
         <?php
  $counter++;
     }
@@ -113,7 +107,7 @@ function filter_photos() {
 
 $args = array(
     'post_type' => 'photos',
-    'posts_per_page' => 12,
+    'posts_per_page' => 8,
     'paged' => $page, // Utilisez le numéro de page actuel pour la pagination
     'order' => 'DESC',
     'post__not_in' => $already_displayed_posts,
@@ -171,17 +165,13 @@ if ($query->have_posts()) {
         setcookie('already_displayed_posts', implode(',', $already_displayed_posts), time() + 3600, '/'); // Stocker les ID sous forme de chaîne séparée par des virgules
 
         ?>
-        <div class="photo" data-photo-id="<?php echo $photo_id; ?>" data-photo-url="<?php echo $photo_url; ?>" data-categorie="<?php echo esc_html($taxo_categorie[0]->name)?> " data-reference="<?php echo esc_attr($reference); ?>" data-lightbox-trigger="true">
-            <a href="<?php echo $photo_permalink; ?>" class="photo-link">
-                <?php the_content(); // Contenu de la photo ?>
-                <div class="photo-details">
-                    <div class="photo-title"><?php the_title(); ?></div>
-                    <div class="photo-category"><?php echo esc_html($taxo_categorie[0]->name)?></div>
-                    <div class="eye-icon"><i class="fa fa-eye"></i></div>
-                    <div class="fullscreen-icon" data-photo-url="<?php echo esc_url($photo_url); ?>" data-type="<?php echo esc_attr($type); ?>" data-reference="<?php echo esc_attr($reference); ?>" data-categorie="<?php echo isset($current_photo_category) ? esc_attr($current_photo_category->name) : ''; ?>"><i class="fa fa-expand"></i></div>
-                </div>
-            </a>
-        </div>
+        
+      <?php
+
+get_template_part('template_parts/photo_block');
+?>
+            
+      
         <?php
     }
 

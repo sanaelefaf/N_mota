@@ -58,8 +58,9 @@ Template Name: Single Photo
         <div class="contactBtn">
             <div class="containerContact">
                 <p> Cette photo vous intéresse ? </p>
-                <button type="button" class="contactLink" data-reference="<?php echo esc_attr($reference); ?>">Contact
+                <button type="button"  id="openContactModal" class="contactLink" data-reference="<?php echo esc_attr($reference); ?>">Contact
                 </button>
+
             </div>
       
   
@@ -136,14 +137,12 @@ Template Name: Single Photo
         while ($related_photos->have_posts()) : $related_photos->the_post();
     ?>
            
-        <div class="photo " data-photo-id="<?php echo $photo_id; ?>" data-photo-url="<?php echo $photo_url; ?>" data-categorie="<?php echo esc_html($taxo_categorie[0]->name)?> " data-reference="<?php echo esc_attr($reference); ?>"> 
+       
    
-        <a href="<?php echo esc_url(get_permalink()); ?>" data-photo-url="<?php echo esc_url(get_field('photo')); ?>" data-type="<?php echo esc_attr(get_field('type')); ?>" data-reference="<?php echo esc_attr(get_field('référence')); ?>">
-        <?php the_content(); ?>
 
         <?php get_template_part( 'template_parts/photo_block' ); ?>
-    </a>
-</div>
+    
+
 
     <?php
         endwhile;

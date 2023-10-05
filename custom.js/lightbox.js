@@ -9,7 +9,8 @@ function setupLightbox() {
     const photoContainers = document.querySelectorAll(".photo"); // Les conteneurs de vos photos
     const prevButton = lightboxContainer.querySelector(".previous");
     const nextButton = lightboxContainer.querySelector(".next");
-    const lightboxTriggerElements = document.querySelectorAll("[data-lightbox-trigger='true']");
+    let currentOpenPhoto = null;
+let originalGridImage = null;
 
     // Vérifiez si les éléments existent avant d'exécuter le code
     if (
@@ -30,6 +31,10 @@ function setupLightbox() {
             const imageUrl = photoContainer.getAttribute("data-photo-url");
             const reference = photoContainer.getAttribute("data-reference");
             const categorie = photoContainer.getAttribute("data-categorie");
+            currentOpenPhoto = photoContainer;
+
+
+
 
             // Récupérer le contenu de la photo
             const photoContent = photoContainer.querySelector("img");
@@ -37,21 +42,33 @@ function setupLightbox() {
             // Mettez à jour la source de l'image, la référence et la catégorie
             const imageElement = document.createElement("img");
             imageElement.src = imageUrl + "?photoId=" + imageId;
-            lightboxImageContainer.innerHTML = ''; // Effacez le contenu précédent
+
             lightboxImageContainer.appendChild(imageElement);
             lightboxReference.textContent = reference;
             lightboxCategorie.textContent = categorie;
 
+// Copiez l'image de la grille pour la restaurer plus tard
+originalGridImage = photoContent.cloneNode(true);
+
+
+
             // Mettez à jour le contenu de la lightbox avec le contenu de la photo
             if (photoContent) {
                 const lightboxImageContainer = lightboxContainer.querySelector(".lightbox-image-container");
-                lightboxImageContainer.innerHTML = ''; // Effacez le contenu précédent
-                lightboxImageContainer.appendChild(photoContent);
-            }
+    
+    // Cloner l'image de la grille et l'ajouter à la lightbox
+    const clonedImage = photoContent.cloneNode(true);
+    lightboxImageContainer.innerHTML = ''; // Effacez le contenu précédent
+    lightboxImageContainer.appendChild(clonedImage);
+}
+            
 
             // Ajoutez la classe "open" pour afficher la lightbox
             lightboxContainer.classList.add("open");
         }
+
+
+        
 
         function showPrevPhoto() {
             currentPhotoIndex--;
@@ -90,7 +107,11 @@ function setupLightbox() {
 
         lightboxClose.addEventListener("click", function () {
             lightboxContainer.classList.remove("open");
-
+            if (originalGridImage) {
+                const lightboxImageContainer = lightboxContainer.querySelector(".lightbox-image-container");
+                lightboxImageContainer.innerHTML = ''; // Effacez le contenu précédent
+                lightboxImageContainer.appendChild(originalGridImage);
+            }
             
         });
     }

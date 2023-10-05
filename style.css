@@ -8,6 +8,50 @@ Version: 1.0
 Tags: photography,pictures, openclassrooms
 Text Domain: Nmota
 */
+/*********************** POLICES **************************/
+@font-face {
+  font-family: 'Poppins';
+  src: url('assets/police/Poppins/Poppins-Regular.ttf') format('truetype'); /* Chemin relatif vers votre fichier TTF */
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Space Mono'; /* Nom de la police que vous utiliserez */
+  src: url('assets/police/Space_Mono/SpaceMono-Bold.ttf') format('truetype'); /* Format TTF pour le gras */
+  font-weight: bold; /* Indiquez le poids de la police */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Mono'; /* Nom de la police que vous utiliserez */
+  src: url('assets/police/Space_Mono/SpaceMono-BoldItalic.ttf') format('truetype'); /* Format TTF pour le gras italique */
+  font-weight: bold;
+  font-style: italic; /* Indiquez le style de la police (italique) */
+}
+
+@font-face {
+  font-family: 'Space Mono'; /* Nom de la police que vous utiliserez */
+  src: url('assets/police/Space_Mono/SpaceMono-Italic.ttf') format('truetype'); /* Format TTF pour l'italique */
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Space Mono'; /* Nom de la police que vous utiliserez */
+  src: url('assets/police/Space_Mono/SpaceMono-Regular.ttf') format('truetype'); /* Format TTF pour la police régulière */
+  font-weight: normal;
+  font-style: normal;
+}
+
+/**************************** GENERAL*************************/
+html, body {
+  font-family: "Space Mono", monospace, sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+ 
+}
+
 
 h1 {
   text-align: center;
@@ -15,10 +59,12 @@ h1 {
   -webkit-text-fill-color: transparent;
   padding: 28% 10% 30%;
   font-size: 100px;
-  font-family: "Space Mono", monospace, sans-serif;
+  font-weight: 700;
   font-style: italic;
   font-weight: bold;
   margin-top: inherit;
+  font-size: 30px;
+ 
 }
 
 .event {
@@ -27,11 +73,22 @@ h1 {
   background-image: url('assets/images/nathalie-11.jpeg');
   background-size: cover;
   background-position: center;
-  height: 962px;
+  height: 100vh;
   margin-bottom: 100px;
 }
 
-/* Style du header */
+/******************************************* HEADER *********************************************/
+.sticky-header {
+  position: fixed; /* Rend l'en-tête en position fixe */
+  top: 0; /* Colle l'en-tête en haut de la fenêtre */
+  left: 0; /* Occupe toute la largeur de la fenêtre */
+  width: 100%; /* Occupe toute la largeur de la fenêtre */
+  background-color: #fff; /* Couleur de fond de l'en-tête */
+  z-index: 1000; /* Place l'en-tête au-dessus du contenu */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Ajoute une ombre légère */
+  transition: background-color 0.3s ease; /* Ajoute une transition pour les changements de couleur de fond */
+}
+
 
   .logo {
 
@@ -43,13 +100,11 @@ h1 {
     display: block;
 }
 
- 
-  /* Style pour le menu */
 
   #nav{
     display: flex;
     justify-content: space-between;
-    padding:10px 20px;
+    padding:0px 20px;
 
   }
   .header {
@@ -74,7 +129,7 @@ h1 {
 }
 
 
-/*FOOTER*/
+/************************************FOOTER**********************************************/
 
 .footer-content {
   display: flex;
@@ -100,22 +155,17 @@ h1 {
 
 }
 
-.line{
+.line,
+.singleline {
   border: none;
     border-top: 1px solid black;
     width: 100%;
     margin:  30px -8px 0px ;
 }
 
-.singleline {
-  border: none;
-  border-top: 1px solid black;
-  width: 100%;
-  margin:  30px -8px 0px ;
-}
-/*modale*/
 
-/* Style pour la modale */
+
+/****************************************MODALE CONTACT************************************** */
 .contact{
   width: 100%;
   height: auto;
@@ -165,22 +215,42 @@ h1 {
   border: 5px solid black;
 }
 
+#contactModal .modal-content .wpforms-container-full #wpforms-45 { 
+  margin: inherit;
+  margin-top: 15px;
+}
+
 #wpforms-form-45 {
 padding: 20px;
 }
 .wpforms-container #wpforms-form-45 .wpforms-field-container .wpforms-field input{
-margin: 0 auto;
+
 height: 30px;
-width:200px
+
 }
+.wpforms-container #wpforms-form-45 .wpforms-field-container .wpforms-field textarea{
+height: 210px;
+}
+
+.wpforms-container #wpforms-form-45 .wpforms-field-container .wpforms-field input,
 .wpforms-container #wpforms-form-45 .wpforms-field-container .wpforms-field textarea {
-  width:200px;
+
   margin: 0 auto;
+  width: 60%;
 }
 
 .wpforms-container #wpforms-form-45 .wpforms-field-container .wpforms-field .wpforms-field-label {
-margin-left: 33%;
 margin-bottom: inherit;
+text-transform: uppercase;
+margin-left: 23%;
+}
+
+
+.wpforms-container #wpforms-form-45 .wpforms-field-container .wpforms-field .wpforms-field-label,
+.wpforms-container-full  #wpforms-form-45 .wpforms-submit-container #wpforms-submit-45   {
+font-family: 'Poppins', sans-serif;
+font-weight: 300;
+font-size: 12px;
 }
 
 .wpforms-container #wpforms-form-45 .wpforms-field-container {
@@ -199,9 +269,7 @@ background-color: #D8D8D8;
 color: black;
 }
 
-/*FILTRE*/
-
-/* Styles pour les filtres */
+/********************************************** FILTRE    ***********************************/
 
 .filters {
   margin-bottom: 20px;
@@ -217,18 +285,17 @@ color: black;
   border: 1px solid black;
   border-radius: 10px;
   margin-right: 20px;
-  width: 260px;
+  width: 20%;
   height: 43px;
 
 }
 
 
-
 #sort {
 position: absolute;
-margin: 0px 323px;
+margin: 0px 385px;
 }
-/* Styles pour la liste des photos */
+/*********************************************** Styles pour la liste des photos **************************************/
 #photo-list {
   display: flex;
   flex-wrap: wrap;
@@ -240,11 +307,6 @@ margin: 0px 323px;
 }
 
 
-/* grille photos */
-
-
-/* CSS pour chaque élément de la grille (2 colonnes) */
-/* CSS pour la grille */
 .content {
   margin: 0px 75px;
 }
@@ -254,12 +316,13 @@ margin: 0px 323px;
   justify-content: space-between;
 }
 
-/* CSS pour chaque élément de la grille (2 colonnes) */
 .photo {
   flex: 0 0 calc(50% - 10px); /* 50% de largeur pour deux colonnes côte à côte avec un espace de 10px */
  
   box-sizing: border-box; /* marges dans le calcul de la largeur */
   position: relative; 
+  width: 600px;
+  margin-bottom: 20px;
 }
 
 
@@ -276,7 +339,30 @@ margin: 0px 323px;
 
 }
 
-/*afficher plus*/
+.containerImg {
+  flex: 0 0 calc(50% - 10px); 
+  margin-bottom: 20px; /* Espacement entre les éléments de la grille */
+  box-sizing: border-box; /* marges dans le calcul de la largeur */
+  position: relative; 
+
+}
+
+.containerImg img{
+  height: 495px;
+  width: 590px;
+  object-fit: cover;
+}
+
+.button{
+  position: relative;
+  height: 20vh;
+  margin: 0;
+  
+    
+
+}
+
+/********************************************************* AFFICHER PLUS **************************************************************/
  #load-more-container {
   display: flex;
   flex-direction: row;
@@ -294,9 +380,9 @@ border: none;
 border-radius: 2px;
 cursor: pointer;
 }
-/* apparenté*/
 
-/* Conteneur principal */
+
+/***********************************************************  CONTACT BTN ****************************************/
 
 .contactBtn {
   display: flex;
@@ -320,12 +406,12 @@ cursor: pointer;
 
 
 .contentPhoto img {
-    width: 100%;
-    height: auto;
+    width: 100vh;
+    height: 100vh;
     object-fit: cover;
 }
 
-/* Icône "plein écran" au survol */
+/**************************************************** Icône "plein écran" au survol ********************************************/
 .contentPhoto:hover::after {
     content: '\f065'; /* Code Unicode de l'icône plein écran (vous pouvez changer cela) */
     font-family: FontAwesome; /* Utilisez la police d'icônes FontAwesome ou une autre de votre choix */
@@ -342,7 +428,8 @@ cursor: pointer;
 
 
 
-/* Bloc 50% de largeur à gauche pour les infos de la photo */
+/******************************************* Bloc 50% de largeur à gauche pour les infos de la photo ******************************/
+
 .detailsPhoto {
   flex: 1;
 
@@ -352,6 +439,7 @@ cursor: pointer;
 
   align-self: end;
 }
+
 .infosPhoto {
   font-family: "Space Mono", monospace, sans-serif;
   font-size: 14px;
@@ -408,32 +496,11 @@ height: 50px;
   padding: 10px 20px;
   font-family: "Space Mono", monospace, sans-serif;
   border: none;
+  cursor: pointer;
   
 }
 
 
-.containerImg {
-  flex: 0 0 calc(50% - 10px); 
-  margin-bottom: 20px; /* Espacement entre les éléments de la grille */
-  box-sizing: border-box; /* marges dans le calcul de la largeur */
-  position: relative; 
-
-}
-
-.containerImg img{
-  height: 495px;
-  width: 590px;
-  object-fit: cover;
-}
-
-.button{
-  position: relative;
-  height: 20vh;
-  margin: 0;
-  
-    
-
-}
 
 .button a{
 color: black;
@@ -457,7 +524,7 @@ color: black;
 
 
 
-/* Style des liens de navigation */
+/**************************************************************  Style des liens de navigation *************************************/
 .navigationLinks {
   display: flex;
   align-items: center;
@@ -470,12 +537,10 @@ color: black;
   font-size: 18px;
 }
 
-/* Style des miniatures des photos de navigation */
-
-.
 
 
-/*lightbox*/
+/********************************************************** ICONE PHOTOS _ LIGHTBOX ************************************************/
+
 
 
 /* Styles pour l'assombrissement au survol */
@@ -487,14 +552,22 @@ font-size: 18px;
 margin: 70px 0px;
 }
 .containerPrincipalSingle {
-  font-family: "Space Mono", monospace, sans-serif;
-  margin: 20px; /* Vous pouvez ajuster la valeur selon vos préférences */
-  padding: 10px; /* Si nécessaire, ajoutez également du padding */
+  
+  margin: 20px; 
+  padding: 10px; 
+}
+.containerPrincipalImg{
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+
 }
 
 /*eye icon*/
 
-/* Assombrir légèrement la photo au survol */
 
 .containerImg
 .photo{
@@ -502,15 +575,11 @@ margin: 70px 0px;
   overflow: hidden;
 }
 
-.containerImg img,
-.photo img{
-  transition: transform 0.3s, filter 0.3s;
-}
 
 .containerImg:hover img,
 .photo:hover img {
-  transform: scale(1.05); /* Ajustez la mise à l'échelle selon vos préférences */
-  filter: brightness(80%); /* Ajustez la luminosité selon vos préférences */
+  
+  filter: brightness(50%);
 }
 
 /* Masquer l'icône "œil" par défaut */
@@ -531,14 +600,6 @@ margin: 70px 0px;
 }
  
 
-.Principal {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-
 .fullscreen-icon {
 
     position: absolute;
@@ -556,11 +617,11 @@ margin: 70px 0px;
 
 .containerImg:hover .fullscreen-icon,
  .fullscreen-icon:hover {
-    opacity: 1; /* Affichez les icônes au survol */
+    opacity: 1; /* Afficher les icônes au survol */
 }
 
 .fullscreen-icon i {
-    font-size: 24px; /* Ajustez la taille de l'icône en fonction de vos préférences */
+    font-size: 24px; 
     color: #ffffff; /* Couleur blanche de l'icône */
     cursor: pointer;
     margin: 10px; /* Marge autour de l'icône */
@@ -568,24 +629,22 @@ margin: 70px 0px;
 
 /* Style pour afficher le titre à gauche */
 .photo-title {
-  position: absolute;
-  left: 10px; /* Ajustez la position horizontale selon vos préférences */
-  bottom: 10px; /* Ajustez la position verticale selon vos préférences */
+  font-family: 'Poppins', sans-serif;
+  left: 10px; 
+  bottom: 10px; 
  
-  color: #ffffff; /* Couleur du texte */
-  padding: 5px 10px; /* Rembourrage du titre */
-  font-weight: bold;
-  font-size: 14px; /* Ajustez la taille du texte selon vos préférences */
-  opacity: 0;
-  transition: opacity 0.3s;
 }
-
-/* Style pour afficher la catégorie à droite */
-.photo-category {
-  position: absolute;
+.photo-category,
+.photo-title {
   right: 10px; /* Ajustez la position horizontale selon vos préférences */
   bottom: 10px; /* Ajustez la position verticale selon vos préférences */
+}
+/* Style pour afficher la catégorie à droite */
+.photo-category,
+.photo-title {
+  position: absolute;
   
+  text-transform: uppercase;
   color: #ffffff; /* Couleur du texte */
   padding: 5px 10px; /* Rembourrage de la catégorie */
   font-size: 14px; /* Ajustez la taille du texte selon vos préférences */
@@ -602,12 +661,11 @@ margin: 70px 0px;
   opacity: 1;
 }
 
-/* LIGHTBOX */
-/* Styles pour la lightbox */
-/* Styles pour la lightbox */
+/*********************************************************** LIGHTBOX *********************************************$$$$$$$$$$$$/
+
 .fa-expand,
 .fa-times {
-    font-size: 24px; /* Taille de la police de l'icône */
+    font-size: 24px; 
     color: #fff; /* Couleur de l'icône */
     cursor: pointer; /* Curseur de type pointeur au survol */
 }
@@ -620,7 +678,7 @@ margin: 70px 0px;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.9); /* Fond semi-transparent */
-  z-index: 9999; /* Assurez-vous qu'elle est au-dessus de tout le reste */
+  z-index: 9999; /*est au-dessus de tout le reste */
 }
 
 .containerLightbox.open {
@@ -658,8 +716,7 @@ margin: 70px 0px;
   right: 10px;
   font-size: 24px;
   cursor: pointer;
-  /* Styles pour le bouton de fermeture */
-  /* ... Ajoutez vos styles personnalisés ici ... */
+  
 }
 
 .previous,
@@ -668,12 +725,17 @@ margin: 70px 0px;
   cursor: pointer;
   color: white;
   font-family: "Space Mono", monospace, sans-serif;
-  /* Styles pour les boutons de navigation précédent et suivant */
-  /* ... Ajoutez vos styles personnalisés ici ... */
+  
 }
 
-.previous {
+.previous,
+.next,
+.lightbox-details{
   position: absolute;
+
+}
+.previous {
+ 
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
@@ -683,7 +745,7 @@ margin: 70px 0px;
 }
 
 .next {
-  position: absolute;
+
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
@@ -693,7 +755,7 @@ margin: 70px 0px;
 }
 
 .lightbox-details {
-  position: absolute;
+
   bottom: 10px; /* Ajustez la distance par rapport au bas de l'image */
   width: 100%;
   display: flex;
@@ -703,14 +765,395 @@ margin: 70px 0px;
 
 .reference {
   text-align: left;
-  margin-left: 140px; /* Ajustez la distance par rapport à gauche */
+  margin-left: 140px; 
   color: white;
+  text-transform: uppercase;
+
 }
 
 .categorie {
   text-align: right;
-  margin-right: 140px; /* Ajustez la distance par rapport à droite */
+  margin-right: 140px; 
   color: white;
+  text-transform: uppercase;
+
 }
 
-/* Styles supplémentaires selon votre préférence */
+
+
+/*********************************************************** menu burger ********************************************/
+.menu-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+ 
+  display:none; 
+}
+
+.burger-bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #333; 
+  margin: 4px auto;
+}
+
+/* Styles pour l'overlay (masqué par défaut) */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Fond semi-transparent pour l'overlay */
+  z-index: 1000; /* Place l'overlay au-dessus de tout le contenu */
+}
+
+
+
+
+/* Afficher l'overlay lorsque le menu burger est ouvert */
+.menu.open + .overlay {
+  display: block;
+}
+
+/* Styles pour le menu (contenu du menu) */
+.menu {
+  position: absolute;
+  top: 0;
+  right: -100%; /* Masquez le menu initialement */
+  width: 250px; 
+  height: 100%;
+  background-color: #fff; 
+  transition: right 0.3s ease; /* Animation pour faire glisser le menu */
+}
+
+/* Afficher le menu lorsque le menu burger est ouvert */
+.menu.open {
+  right: 0;
+}
+
+/* Styles pour la croix (classe .close) */
+.menu-toggle.active .top-bar {
+  transform: rotate(45deg) translate(8px, 7px);
+}
+
+.menu-toggle.active .middle-bar {
+  opacity: 0;
+}
+
+.menu-toggle.active .bottom-bar {
+  transform: rotate(-45deg) translate(2px, -2px);
+}
+
+
+.arrowsContainer a {
+  text-decoration: none;
+}
+
+
+
+ 
+
+
+
+
+/********************************************** RESPONSIVE***************************************************/
+
+@media screen and (max-width: 582px) {
+.filters form {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.filters select {
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+#sort{
+  position: inherit;
+  margin: inherit;
+}
+
+h1 {
+  font-size: 30px;
+  padding: 50% 10% 50%;
+}
+.event {
+  width: 100vh;
+}
+
+html, body {
+  width: 100vh;
+}
+
+
+}
+
+
+
+
+@media screen and (max-width: 767px) {
+  .lightbox-image-container img {
+    max-width: 50%;}
+
+
+  #photo-list {
+    display: flex;
+    flex-wrap: wrap;
+    /* align-items: flex-end; */
+    justify-content: center;
+  width: 100%;
+  }
+
+  
+ 
+
+  h1 {
+    font-size: 80px;
+  }
+  
+#menu-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  
+}
+
+.containerPrincipalImg {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.detailsPhoto a  {
+  align-self: end;
+}
+
+.containerSingle {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+}
+
+.detailsPhoto{
+  align-self: baseline;
+}
+
+
+.menu-toggle {
+  display: block; /* Masquer le bouton burger sur les écrans larges */
+}
+
+/* Masquer le menu par défaut sur les écrans étroits */
+
+/* Afficher le menu burger sur les écrans étroits */
+.menu.open {
+  display: block;
+  /* Ajoutez ici les styles pour le menu mobile */
+}
+
+.header{
+  display:none;
+}
+
+.show {
+
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 47px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color:  #E00000;
+   transition: opacity 0.5 ease;
+  opacity: 0;
+  animation: fade-in-slide-up 1s forwards;
+  position: fixed; /* Le menu reste en place même si vous faites défiler la page */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000; /* Place le menu au-dessus de tout le contenu */
+  overflow-y: auto; 
+  
+}
+
+.show a {
+  font-size: 70px;
+  color: white;
+}
+@keyframes fade-in-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+#nav {
+  display: block;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.logo a {
+  padding-top: inherit;
+}
+
+
+
+.filters form {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+
+.filters select {
+  margin-right: inherit;
+}
+
+.containerPrincipalImg {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.singleline {
+  width: 100vh;
+}
+
+
+
+}
+
+
+
+  /* Media query pour les écrans de tablette (par exemple, iPad) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .lightbox-image-container img {
+    max-width: 50%;}
+
+    .containerPrincipalImg {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-end;
+  }
+  #photo-list {
+    display: flex;
+    flex-wrap: wrap;
+    /* align-items: flex-end; */
+    justify-content: center;
+  width: 100%;
+}
+
+.menu-toggle {
+  display: block; /* Masquer le bouton burger sur les écrans larges */
+}
+
+/* Masquer le menu par défaut sur les écrans étroits */
+
+/* Afficher le menu burger sur les écrans étroits */
+.menu.open {
+  display: block;
+  /* Ajoutez ici les styles pour le menu mobile */
+}
+
+.header{
+  display:none;
+}
+
+.show {
+
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 47px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color:  #E00000;
+   transition: opacity 0.5 ease;
+  opacity: 0;
+  animation: fade-in-slide-up 1s forwards;
+  position: fixed; /* Le menu reste en place même si vous faites défiler la page */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000; /* Place le menu au-dessus de tout le contenu */
+  overflow-y: auto; 
+  
+}
+
+.show a {
+  font-size: 70px;
+  color: white;
+}
+@keyframes fade-in-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+#nav {
+  display: block;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.logo a {
+  padding-top: inherit;
+}
+
+#sort{
+  margin: Opx 59%;
+}
+
+.filters form {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filters select {
+  margin-right: inherit;
+}
+
+
+}

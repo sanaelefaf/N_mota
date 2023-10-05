@@ -12,9 +12,11 @@
         <!-- Bouton pour fermer la lightbox -->
         <svg xmlns="http://www.w3.org/2000/svg" width="23" height="24" viewBox="0 0 23 24" fill="none">
             <!-- Icône de fermeture (à ajouter) -->
-            <rect width="23" height="2" rx="1" fill="#000" />
-            <rect x="7" y="5" width="2" height="14" rx="1" fill="#000" />
-            <rect x="14" y="5" width="2" height="14" rx="1" fill="#000" />
+           
+            <line x1="1" y1="1" x2="22" y2="22" stroke="#fff" stroke-width="2" />
+    <line x1="1" y1="22" x2="22" y2="1" stroke="#fff" stroke-width="2" />
+</svg>
+            
         </svg>
     </div>
     <div class="previous">

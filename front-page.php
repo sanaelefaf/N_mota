@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    
     <title>Nathalie motat</title>
     <?php wp_head(); ?> 
 </head>
@@ -12,11 +11,12 @@
 <header>
     <?php get_header(); ?>
 </header>
+<main>
 <div class="event">
     <h1>PHOTOGRAPHE EVENT</h1>
 </div>
 <div class="content">
-    <div class="filters">
+    <section class="filters">
         <form action="" method="get">
             <?php
             //formulaire les taxonomies via get_terms
@@ -59,7 +59,7 @@
             </select>
     
         </form>
-    </div>
+            </section>
 
     <section class="hero">
     <div id="photo-list" class="photo-grid"> 
@@ -74,7 +74,7 @@
 
         $args = array(
             'post_type' => 'photos',
-            'posts_per_page' => 12,
+            'posts_per_page' => 8,
             'paged' => $page,
            
    
@@ -130,31 +130,11 @@
                 $photo_permalink = get_permalink($photo_id);
         ?>
                 
-             
-                <div class="photo" data-photo-id="<?php echo $photo_id; ?>" data-photo-url="<?php echo $photo_url; ?>" data-categorie="<?php echo esc_html($taxo_categorie[0]->name)?> " data-reference="<?php echo esc_attr($reference); ?>">
+              
+                
 
-
-                    <a href="<?php echo $photo_permalink; ?>" class="photo-link">
-                        <?php the_content(); // Contenu de la photo ?>
-
-                        <div class="photo-details">
-
-                            <div class="photo-title"><?php the_title(); ?></div> 
-                           
-
-                                <div class="photo-category"><?php echo esc_html($taxo_categorie[0]->name)?></div> 
-                         
-
-                            <div class="eye-icon">
-                                <i class="fa fa-eye"></i>
-                            </div>
-
-                            <div class="fullscreen-icon" data-photo-url="<?php echo esc_url($photo_url); ?>" data-type="<?php echo esc_attr($type); ?>" data-reference="<?php echo esc_attr($reference); ?>" data-categorie="<?php echo isset($current_photo_category) ? esc_attr($current_photo_category->name) : ''; ?>">
-                                <i class="fa fa-expand"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                <?php get_template_part( 'template_parts/photo_block' ); ?>
+               
         <?php
             }
             wp_reset_postdata();
@@ -172,6 +152,7 @@
         <button id="load-more">Afficher plus</button>
     </div>
 </div>
+    </main>
 <footer>
     <?php get_footer(); ?>
 </footer>

@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById("contactModal");
     const modalTrigger = document.querySelector(".open_modal");
     const modalClose = document.getElementById("modalClose");
+   
   
     function toggleModal() {
       if (modal.style.display === "block") {
@@ -22,6 +23,16 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.style.display = "block";
       }
     }
+
+// Ajoutez un événement au clic sur le bouton "Contact" avec l'id "openContactModal"
+const contactButton = document.getElementById("openContactModal");
+if (contactButton) {
+    contactButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        toggleModal();
+    });
+}
+
   
     modalTrigger.addEventListener("click", function (event) {
       event.preventDefault();
@@ -88,6 +99,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Mettez à jour les cookies pour suivre les articles déjà affichés
                 alreadyDisplayedPosts = alreadyDisplayedPosts.concat(response.split(','));
                 document.cookie = 'already_displayed_posts=' + alreadyDisplayedPosts.join(',');
+
+                // Vérifier si toutes les images sont chargées
+                if (totalImages > 0 && $("#photo-list .photo").length >= totalImages) {
+                  $("#load-more").hide(); // Cacher le bouton "Afficher plus"
+              }
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log("Erreur lors du chargement des photos : " + errorThrown);
@@ -126,10 +142,36 @@ document.addEventListener("DOMContentLoaded", function () {
           success: function(response) {
               $("#photo-list").append(response);
               page++;
+
+              // Vérifier si toutes les images sont chargées
+              if (totalImages > 0 && $("#photo-list .photo").length >= totalImages) {
+                $("#load-more").hide(); // Cacher le bouton "Afficher plus"
+            }
           },
           error: function(xhr, textStatus, errorThrown) {
               console.log("Erreur lors du chargement des photos : " + errorThrown);
           }
         });  
     });
+    // Fonction pour initialiser le nombre total d'images disponibles
+    function initTotalImages() {
+      totalImages = $("#photo-list .photo").length;
+  }
+
+  // Appel initial pour initialiser le nombre total d'images
+  initTotalImages();
+});
+
+
+//menu burger//
+
+document.addEventListener('DOMContentLoaded', function() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const menu = document.getElementById("menu-header");
+
+  menuToggle.addEventListener('click', function() {
+    this.classList.toggle("active");
+    menu.classList.toggle("show");
+   
+  });
 });

@@ -11,17 +11,27 @@
 </head>
    
 <body>
-<header>
+<header class="sticky-header">
     
     
     <nav id="nav">
+    
+ 
     <div class="logo">
         <a href="<?php echo esc_url(home_url('/')); ?>">
         <img class="cat"src="<?php echo get_template_directory_uri() . '/assets/images/Nathalie_Mota.png'; ?>" alt="">
             
         </a>
+
+        <button class="menu-toggle" aria-label="Toggle menu">
+  <span class="burger-bar top-bar"></span>
+  <span class="burger-bar middle-bar"></span>
+  <span class="burger-bar bottom-bar"></span>
+</button>
     </div> 
     <div class="nav">
+    
+
     <?php
     wp_nav_menu( array(
         'theme_location' => 'header', // Emplacement du menu défini dans functions.php
@@ -34,10 +44,11 @@
     <?php get_template_part( 'template_parts/modale' ); ?>
 </div>
 </div>
-   
+</div>  
     
 </li>
 </ul>
 
     </nav>
+  
 </header>
