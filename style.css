@@ -63,8 +63,6 @@ h1 {
   font-style: italic;
   font-weight: bold;
   margin-top: inherit;
-  font-size: 30px;
- 
 }
 
 .event {
@@ -78,17 +76,6 @@ h1 {
 }
 
 /******************************************* HEADER *********************************************/
-.sticky-header {
-  position: fixed; /* Rend l'en-tête en position fixe */
-  top: 0; /* Colle l'en-tête en haut de la fenêtre */
-  left: 0; /* Occupe toute la largeur de la fenêtre */
-  width: 100%; /* Occupe toute la largeur de la fenêtre */
-  background-color: #fff; /* Couleur de fond de l'en-tête */
-  z-index: 1000; /* Place l'en-tête au-dessus du contenu */
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Ajoute une ombre légère */
-  transition: background-color 0.3s ease; /* Ajoute une transition pour les changements de couleur de fond */
-}
-
 
   .logo {
 
@@ -524,7 +511,7 @@ color: black;
 
 
 
-/**************************************************************  Style des liens de navigation *************************************/
+/******************************************* Style des liens de navigation *************************************/
 .navigationLinks {
   display: flex;
   align-items: center;
@@ -539,7 +526,7 @@ color: black;
 
 
 
-/********************************************************** ICONE PHOTOS _ LIGHTBOX ************************************************/
+/************************************* ICONE PHOTOS _ LIGHTBOX***********************************/
 
 
 
@@ -661,11 +648,12 @@ margin: 70px 0px;
   opacity: 1;
 }
 
-/*********************************************************** LIGHTBOX *********************************************$$$$$$$$$$$$/
-
+/* LIGHTBOX */
+/* Styles pour la lightbox */
+/* Styles pour la lightbox */
 .fa-expand,
 .fa-times {
-    font-size: 24px; 
+    font-size: 24px; /* Taille de la police de l'icône */
     color: #fff; /* Couleur de l'icône */
     cursor: pointer; /* Curseur de type pointeur au survol */
 }
@@ -678,7 +666,7 @@ margin: 70px 0px;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.9); /* Fond semi-transparent */
-  z-index: 9999; /*est au-dessus de tout le reste */
+  z-index: 9999; /* Assurez-vous qu'elle est au-dessus de tout le reste */
 }
 
 .containerLightbox.open {
@@ -716,7 +704,8 @@ margin: 70px 0px;
   right: 10px;
   font-size: 24px;
   cursor: pointer;
-  
+  /* Styles pour le bouton de fermeture */
+  /* ... Ajoutez vos styles personnalisés ici ... */
 }
 
 .previous,
@@ -725,17 +714,12 @@ margin: 70px 0px;
   cursor: pointer;
   color: white;
   font-family: "Space Mono", monospace, sans-serif;
-  
+  /* Styles pour les boutons de navigation précédent et suivant */
+  /* ... Ajoutez vos styles personnalisés ici ... */
 }
 
-.previous,
-.next,
-.lightbox-details{
-  position: absolute;
-
-}
 .previous {
- 
+  position: absolute;
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
@@ -745,7 +729,7 @@ margin: 70px 0px;
 }
 
 .next {
-
+  position: absolute;
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
@@ -755,7 +739,7 @@ margin: 70px 0px;
 }
 
 .lightbox-details {
-
+  position: absolute;
   bottom: 10px; /* Ajustez la distance par rapport au bas de l'image */
   width: 100%;
   display: flex;
@@ -765,36 +749,36 @@ margin: 70px 0px;
 
 .reference {
   text-align: left;
-  margin-left: 140px; 
+  margin-left: 140px; /* Ajustez la distance par rapport à gauche */
   color: white;
   text-transform: uppercase;
-
+  font-family:"Space Mono", monospace, sans-serif; 
 }
 
 .categorie {
   text-align: right;
-  margin-right: 140px; 
+  margin-right: 140px; /* Ajustez la distance par rapport à droite */
   color: white;
   text-transform: uppercase;
-
+  font-family:"Space Mono", monospace, sans-serif; ;
 }
 
+/* Styles supplémentaires selon votre préférence */
 
-
-/*********************************************************** menu burger ********************************************/
+/* Styles pour le menu burger */
 .menu-toggle {
   background: none;
   border: none;
   cursor: pointer;
  
-  display:none; 
+  display:none; /* Ajoutez une position relative pour positionner l'overlay */
 }
 
 .burger-bar {
   display: block;
   width: 25px;
   height: 3px;
-  background-color: #333; 
+  background-color: #333; /* Couleur des lignes du burger */
   margin: 4px auto;
 }
 
@@ -811,6 +795,7 @@ margin: 70px 0px;
 }
 
 
+  /* Styles pour le menu en mode plein écran */
 
 
 /* Afficher l'overlay lorsque le menu burger est ouvert */
@@ -823,9 +808,9 @@ margin: 70px 0px;
   position: absolute;
   top: 0;
   right: -100%; /* Masquez le menu initialement */
-  width: 250px; 
+  width: 250px; /* Largeur du menu (ajustez selon vos besoins) */
   height: 100%;
-  background-color: #fff; 
+  background-color: #fff; /* Couleur de fond du menu */
   transition: right 0.3s ease; /* Animation pour faire glisser le menu */
 }
 
@@ -848,18 +833,23 @@ margin: 70px 0px;
 }
 
 
+
+/* Styles pour l'en-tête */
+/* Styles pour l'en-tête */
+.sticky-header {
+  position: fixed; /* Rend l'en-tête en position fixe */
+  top: 0; /* Colle l'en-tête en haut de la fenêtre */
+  left: 0; /* Occupe toute la largeur de la fenêtre */
+  width: 100%; /* Occupe toute la largeur de la fenêtre */
+  background-color: #fff; /* Couleur de fond de l'en-tête */
+  z-index: 1000; /* Place l'en-tête au-dessus du contenu */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Ajoute une ombre légère */
+  transition: background-color 0.3s ease; /* Ajoute une transition pour les changements de couleur de fond */
+}
+
 .arrowsContainer a {
   text-decoration: none;
 }
-
-
-
- 
-
-
-
-
-/********************************************** RESPONSIVE***************************************************/
 
 @media screen and (max-width: 582px) {
 .filters form {
@@ -941,6 +931,7 @@ html, body {
   display: flex;
   flex-direction: column-reverse;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .detailsPhoto{
@@ -978,7 +969,7 @@ html, body {
   opacity: 0;
   animation: fade-in-slide-up 1s forwards;
   position: fixed; /* Le menu reste en place même si vous faites défiler la page */
-  top: 0;
+  top: -20px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -1100,7 +1091,7 @@ html, body {
   opacity: 0;
   animation: fade-in-slide-up 1s forwards;
   position: fixed; /* Le menu reste en place même si vous faites défiler la page */
-  top: 0;
+  top: -20px;
   left: 0;
   width: 100%;
   height: 100%;

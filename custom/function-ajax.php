@@ -14,7 +14,7 @@ function load_photos() {
 $args = array(
     'post_type' => 'photos',
     'posts_per_page' => 8,
-    'paged' => 2, // Utilisez le numéro de page actuel pour la pagination
+    'paged' => 2, // le numéro de page actuel pour la pagination
     'order' => 'DESC',
     'post__not_in' => $already_displayed_posts,
 );
@@ -73,7 +73,7 @@ if ($query->have_posts()) {
         ?>
       <?php
 
-get_template_part('template_parts/photo_block');
+    get_template_part('template_parts/photo_block');
 ?>
         
         <?php

@@ -1,38 +1,39 @@
-// MODAL
+// MODAL CONTACT
 document.addEventListener("DOMContentLoaded", function () {
-    const navMenu = document.querySelector("#menu-header");
-    
-    if (navMenu) {
-      const contactLink = document.createElement("li");
-      contactLink.className = "menu-item";
-      contactLink.innerHTML = '<a href="#" class="open_modal">Contact</a>';
+    const navMenu = document.querySelector("#menu-header");//sélectionne un élément HTML avec l'ID #menu-header et le stocke dans la variable navMenu
+    if (navMenu) { //vérifie si l'élément navMenu existe. Si l'élément avec l'ID #menu-header existe sur la page, le code à l'intérieur de cette condition sera exécuté.
+      const contactLink = document.createElement("li");//nouvelle balise HTML <li> (élément de liste) est créée et stockée dans la variable contactLink.
+      contactLink.className = "menu-item";//attribue la classe CSS "menu-item" à l'élément <li>
+      contactLink.innerHTML = '<a href="#" class="open_modal">Contact</a>'; //Cela définit le contenu HTML de l'élément <li>
       
-      navMenu.appendChild(contactLink);
+      navMenu.appendChild(contactLink);//ajoute l'élément contactLink (qui contient le lien "Contact") à la fin du menu de navigation représenté par l'élément navMenu.
     }
     
-
+// selectionner les elements du DOM 
     const modal = document.getElementById("contactModal");
     const modalTrigger = document.querySelector(".open_modal");
     const modalClose = document.getElementById("modalClose");
    
-  
+  //fonction sera utilisée pour afficher ou masquer la fenêtre modale en fonction de son état actuel.
     function toggleModal() {
-      if (modal.style.display === "block") {
-        modal.style.display = "none";
+      if (modal.style.display === "block") // si l'élément modal est définie sur "block". Si c'est le cas, cela signifie que la fenêtre modale est actuellement affichée.
+      {
+        modal.style.display = "none"; //Si la fenêtre modale est actuellement affichée, cette ligne la masque en définissant la propriété display sur "none".
       } else {
-        modal.style.display = "block";
+        modal.style.display = "block"; // Si la fenêtre modale n'est pas affichée, cette ligne l'affiche en définissant la propriété display sur "block".
       }
     }
 
-// Ajoutez un événement au clic sur le bouton "Contact" avec l'id "openContactModal"
+// Ajoute un événement au clic sur le bouton "Contact" avec l'id "openContactModal"
 const contactButton = document.getElementById("openContactModal");
 if (contactButton) {
-    contactButton.addEventListener("click", function (event) {
+    contactButton.addEventListener("click", function (event) { // gestionnaire evenement au click
         event.preventDefault();
-        toggleModal();
+        toggleModal(); // appelle la fonction toggleModal() pour afficher ou masquer la fenêtre modale lorsque le bouton "Contact" est cliqué.
     });
 }
 
+// ajoutent des écouteurs d'événements "click" pour afficher ou masquer la fenêtre modale lorsque les éléments correspondants sont cliqués.
   
     modalTrigger.addEventListener("click", function (event) {
       event.preventDefault();
@@ -62,7 +63,7 @@ if (contactButton) {
         }
         return "";
     }
-
+// gestion du chargement des photos en fonction des filtres sélectionnés par l'utilisateur
     var page = 1; // Numéro de page pour la pagination
     var loading = false; // Variable pour éviter les chargements multiples
 
@@ -72,14 +73,16 @@ if (contactButton) {
             return; // Ne chargez pas si une requête est déjà en cours
         }
 
+        //récupèrent les valeurs des filtres sélectionnés par l'utilisateur depuis les éléments HTML avec les IDs #categorie, #format, et #sort
         const categorie = $("#categorie").val();
         const format = $("#format").val();
         const sort = $("#sort").val();
-        var alreadyDisplayedPosts = getCookie('already_displayed_posts').split(',');
+        var alreadyDisplayedPosts = getCookie('already_displayed_posts').split(','); //utilise la fonction getCookie (que vous avez expliquée précédemment) pour obtenir une liste d'articles déjà affichés à partir d'un cookie nommé 'already_displayed_posts'. Cette liste est stockée dans la variable alreadyDisplayedPosts sous forme d'un tableau.
 
         loading = true; // Marquer le chargement en cours
 
         // Requête AJAX vers le serveur
+        //e envoie des données telles que la catégorie sélectionnée, le format, le tri, le numéro de page, et les articles déjà affichés au serveur.
         $.ajax({
             url: ajaxurl,
             type: "GET",
@@ -91,17 +94,18 @@ if (contactButton) {
                 page: page,
                 already_displayed_posts: alreadyDisplayedPosts
             },
+            //fonction à exécuter lorsque la requête AJAX réussit
             success: function(response) {
-                $("#photo-list").append(response); 
-                page++; // Augmenter le numéro de page pour la prochaine requête
+                $("#photo-list").append(response); //contenu HTML
+                page++; // Augmenter le numéro de page pour la prochaine requête, incrementation
                 loading = false; // Marquer le chargement comme terminé
 
-                // Mettez à jour les cookies pour suivre les articles déjà affichés
+                // Mettre à jour les cookies pour suivre les articles déjà affichés
                 alreadyDisplayedPosts = alreadyDisplayedPosts.concat(response.split(','));
                 document.cookie = 'already_displayed_posts=' + alreadyDisplayedPosts.join(',');
 
                 // Vérifier si toutes les images sont chargées
-                if (totalImages > 0 && $("#photo-list .photo").length >= totalImages) {
+                if (totalImages > 0 && $("#photo-list .photo").length >= totalImages) {//Cela vérifie si le nombre total d'images (totalImages) est supérieur à zéro, ce qui signifie qu'il y a des images à charger.
                   $("#load-more").hide(); // Cacher le bouton "Afficher plus"
               }
             },

@@ -18,7 +18,8 @@ Template Name: Single Photo
 ?>
 </header>
 <body>
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+<?php if (have_posts()) : while (have_posts()) : the_post();//boucle WordPress qui parcourt les articles existants. La boucle continuera tant qu'il y aura des articles à traiter.
+ ?>
 
     <?php
     // Get specific article data
@@ -26,7 +27,7 @@ Template Name: Single Photo
     $photo_url = get_post_meta($post->ID, 'photo', true);
     $type = get_field('type'); // Type from ACF
     $reference = get_field('reference'); // Reference from ACF
-    $taxo_categorie = get_the_terms($photo_id, 'categorie');
+    $taxo_categorie = get_the_terms($photo_id, 'categorie');//les termes de la taxonomie 'categorie' associés à l'article actuel 
     $taxo_format = get_the_terms($photo_id, 'format');
     $taxo_annee = get_the_terms($photo_id, 'annee');
     $photo_permalink = get_permalink(); 
