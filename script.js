@@ -1,4 +1,5 @@
 // MODAL CONTACT
+
 document.addEventListener("DOMContentLoaded", function () {
     const navMenu = document.querySelector("#menu-header");//sélectionne un élément HTML avec l'ID #menu-header et le stocke dans la variable navMenu
     if (navMenu) { //vérifie si l'élément navMenu existe. Si l'élément avec l'ID #menu-header existe sur la page, le code à l'intérieur de cette condition sera exécuté.
@@ -45,25 +46,21 @@ if (contactButton) {
     });
   });
 
-  //PHOTO
+
+
+
+
+
+
+  ////////////////////////////////////////////////////////PHOTO///////////////////////////////////////
+
+  //CHARGEMENT PHOTOS ET FILTRES
+
   jQuery(document).ready(function($) {
-    // Fonction pour récupérer la valeur d'un cookie par son nom
-    function getCookie(cookieName) {
-        var name = cookieName + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var cookieArray = decodedCookie.split(';');
-        for (var i = 0; i < cookieArray.length; i++) {
-            var cookie = cookieArray[i];
-            while (cookie.charAt(0) === ' ') {
-                cookie = cookie.substring(1);
-            }
-            if (cookie.indexOf(name) === 0) {
-                return cookie.substring(name.length, cookie.length);
-            }
-        }
-        return "";
-    }
+    
+    
 // gestion du chargement des photos en fonction des filtres sélectionnés par l'utilisateur
+
     var page = 1; // Numéro de page pour la pagination
     var loading = false; // Variable pour éviter les chargements multiples
 
@@ -77,7 +74,7 @@ if (contactButton) {
         const categorie = $("#categorie").val();
         const format = $("#format").val();
         const sort = $("#sort").val();
-        var alreadyDisplayedPosts = getCookie('already_displayed_posts').split(','); //utilise la fonction getCookie (que vous avez expliquée précédemment) pour obtenir une liste d'articles déjà affichés à partir d'un cookie nommé 'already_displayed_posts'. Cette liste est stockée dans la variable alreadyDisplayedPosts sous forme d'un tableau.
+       
 
         loading = true; // Marquer le chargement en cours
 
@@ -85,14 +82,15 @@ if (contactButton) {
         //e envoie des données telles que la catégorie sélectionnée, le format, le tri, le numéro de page, et les articles déjà affichés au serveur.
         $.ajax({
             url: ajaxurl,
-            type: "GET",
-            data: {
+            type: "GET",//requête HTTP sera de type GET. Cela signifie que vous demandez au serveur de vous fournir des données, sans apporter de modifications côté serveur.
+            data://données qui seront incluses dans la requête GET. 
+             {
                 action: "filter_photos",
                 categorie: categorie,
                 format: format,
                 sort: sort,
                 page: page,
-                already_displayed_posts: alreadyDisplayedPosts
+                
             },
             //fonction à exécuter lorsque la requête AJAX réussit
             success: function(response) {
@@ -100,13 +98,11 @@ if (contactButton) {
                 page++; // Augmenter le numéro de page pour la prochaine requête, incrementation
                 loading = false; // Marquer le chargement comme terminé
 
-                // Mettre à jour les cookies pour suivre les articles déjà affichés
-                alreadyDisplayedPosts = alreadyDisplayedPosts.concat(response.split(','));
-                document.cookie = 'already_displayed_posts=' + alreadyDisplayedPosts.join(',');
+  
 
                 // Vérifier si toutes les images sont chargées
                 if (totalImages > 0 && $("#photo-list .photo").length >= totalImages) {//Cela vérifie si le nombre total d'images (totalImages) est supérieur à zéro, ce qui signifie qu'il y a des images à charger.
-                  $("#load-more").hide(); // Cacher le bouton "Afficher plus"
+                 
               }
             },
             error: function(xhr, textStatus, errorThrown) {
@@ -116,7 +112,8 @@ if (contactButton) {
         });
     }
 
-    // Fonction pour filtrer les photos en fonction des critères de filtre
+  // Afficher plus
+
     function filterPhotos() {
         page = 1; // Réinitialiser le numéro de page lorsque les filtres changent
         $("#photo-list").empty(); // Vider la liste actuelle
@@ -167,7 +164,7 @@ if (contactButton) {
 });
 
 
-//menu burger//
+///////////////////////////////////////// menu burger ///////////////////////
 
 document.addEventListener('DOMContentLoaded', function() {
   const menuToggle = document.querySelector('.menu-toggle');

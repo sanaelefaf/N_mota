@@ -229,7 +229,7 @@ height: 210px;
 .wpforms-container #wpforms-form-45 .wpforms-field-container .wpforms-field .wpforms-field-label {
 margin-bottom: inherit;
 text-transform: uppercase;
-margin-left: 23%;
+margin-left: 20%;
 }
 
 
@@ -254,6 +254,7 @@ margin: 0 auto;
 width: 200px;
 background-color: #D8D8D8;
 color: black;
+font-family: "Space Mono", monospace, sans-serif;
 }
 
 /********************************************** FILTRE    ***********************************/

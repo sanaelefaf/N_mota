@@ -10,7 +10,7 @@
     </div>
     <div class="close">
         <!-- Bouton pour fermer la lightbox -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="24" viewBox="0 0 23 24" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="24" viewBox="0 0 23 24" fill="none"><!-- afficher une image vectorielle -->
             <!-- Icône de fermeture (à ajouter) -->
            
             <line x1="1" y1="1" x2="22" y2="22" stroke="#fff" stroke-width="2" />

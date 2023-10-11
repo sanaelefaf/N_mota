@@ -19,7 +19,7 @@
     <section class="filters">
         <form action="" method="get"> 
             <?php
-           // Récupération des termes de taxonomie 'categorie' via get_terms
+        
            //Récupère les termes de la taxonomie "categorie" et les stocke dans la variable $categories.
             $categories = get_terms(array(
                 'taxonomy' => 'categorie',
@@ -86,6 +86,7 @@
             'post_type' => 'photos',
             'posts_per_page' => 8,
             'paged' => $page,//page actuelle
+            'orderby' => 'rand', //aleatoire
            
    
         );
@@ -121,7 +122,7 @@
         }
 
         //  date de publication
-        $args['orderby'] = 'date';
+        $args['orderby'] = 'rand';
 
      //l'objet WP_Query qui est créé avec les arguments définis, prêt à exécuter la requête.
         $query = new WP_Query($args);
@@ -131,19 +132,9 @@
         if ($query->have_posts()) {
             while ($query->have_posts()) {
                 $query->the_post();
-                $photo_id = get_the_ID();
-                // Obtention de l'ID de la photo
-                $type = get_field('type'); // le type depuis ACF
-                $reference = get_field('reference'); // la référence depuis ACF
-                $already_displayed_posts[] = get_the_ID();
-                $photo_url = get_post_meta($photo_id, 'photo', true);
-                $home_page_id = get_option('page_on_front');// Obtention de l'ID de la page d'accueil
-                $taxo_categorie = get_the_terms($photo_id, 'categorie');
-                $home_page_url = get_permalink($home_page_id);
-                $photo_permalink = get_permalink($photo_id);// Obtention de l'URL de la page de la photo
-        ?>
                 
-              
+        ?>
+                 
                 
 
                 <?php get_template_part( 'template_parts/photo_block' ); ?>

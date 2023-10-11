@@ -17,11 +17,12 @@ $args = array(
     'paged' => 2, // le numéro de page actuel pour la pagination
     'order' => 'DESC',
     'post__not_in' => $already_displayed_posts,
+   
 );
 
 $tax_queries = array();
 
-if (!empty($category)) {
+if (!empty($category)) {// SI VARIABLE est pas vide
     $tax_queries[] = array(
         'taxonomy' => 'categorie',
         'field' => 'slug',
@@ -37,38 +38,37 @@ if (!empty($format)) {
     );
 }
 
+
+//Si le tableau $tax_queries n'est pas vide (c'est-à-dire qu'il contient des paramètres de requête pour la taxonomie personnalisée),
+// alors cette ligne ajoute ces paramètres de requête au tableau $args.
 if (!empty($tax_queries)) {
     $args['tax_query'] = $tax_queries;
 }
 
+
 if ($sort === 'asc') {
     $args['order'] = 'ASC';
+    //si la variable $sort est égale à la chaîne de caractères 'asc'. Elle teste donc si l'ordre de tri souhaité est ascendant .
 }
 
-// Triez par date de publication
+// Trie par date de publication
 $args['orderby'] = 'date';
 
+//EXECUTE REQUETE 
 $query = new WP_Query($args);
 
+
+//vérifie si la requête a renvoyé des résultats. Si la requête a des articles correspondants, le code à l'intérieur du bloc if sera exécuté.
 if ($query->have_posts()) {
     ob_start();
 
     $counter = 0; // Initialiser le compteur
 
-    while ($query->have_posts()) {
-        $query->the_post();
-
-
-        // Si le compteur est inférieur ou égal à 12, passez à la prochaine itération (ignorer les 12 premières photos)
+    while ($query->have_posts())//parcourir les elements du post 
+    {
+        $query->the_post(); //ccéder au prochain article dans la liste des résultats de la requête.
+        $already_displayed_posts[] = $photo_id;//ajoute l'ID de l'article actuel à un tableau $already_displayed_posts, qui est utilisé pour suivre les articles déjà affichés.
        
-        $photo_id = get_the_ID();
-        $type = get_field('type'); // le type depuis ACF
-        $reference = get_field('reference'); // la référence depuis ACF
-        $photo_url = get_post_meta($photo_id, 'photo', true);
-        $taxo_categorie = get_the_terms($photo_id, 'categorie');
-        $photo_permalink = get_permalink($photo_id);
-        $already_displayed_posts[] = $photo_id;
-        setcookie('already_displayed_posts', implode(',', $already_displayed_posts), time() + 3600, '/'); // Stocker les ID sous forme de chaîne séparée par des virgules
 
         ?>
       <?php
@@ -77,7 +77,7 @@ if ($query->have_posts()) {
 ?>
         
         <?php
- $counter++;
+ $counter++;// incrémente le compteur pour suivre le nombre d'articles affichés.
     }
 
      // Appel à la fonction JavaScript une seule fois après avoir chargé toutes les images
@@ -108,9 +108,9 @@ function filter_photos() {
 $args = array(
     'post_type' => 'photos',
     'posts_per_page' => 8,
-    'paged' => $page, // Utilisez le numéro de page actuel pour la pagination
+    'paged' => $page, // numéro de page actuel pour la pagination
     'order' => 'DESC',
-    'post__not_in' => $already_displayed_posts,
+
 );
 
 $tax_queries = array();
@@ -139,7 +139,7 @@ if ($sort === 'asc') {
     $args['order'] = 'ASC';
 }
 
-// Triez par date de publication
+// Trie par date de publication
 $args['orderby'] = 'date';
 
 $query = new WP_Query($args);
@@ -153,16 +153,7 @@ if ($query->have_posts()) {
         $query->the_post();
 
 
-        // Si le compteur est inférieur ou égal à 12, passez à la prochaine itération (ignorer les 12 premières photos)
-       
-        $photo_id = get_the_ID();
-        $type = get_field('type'); // le type depuis ACF
-        $reference = get_field('reference'); // la référence depuis ACF
-        $photo_url = get_post_meta($photo_id, 'photo', true);
-        $taxo_categorie = get_the_terms($photo_id, 'categorie');
-        $photo_permalink = get_permalink($photo_id);
-        $already_displayed_posts[] = $photo_id;
-        setcookie('already_displayed_posts', implode(',', $already_displayed_posts), time() + 3600, '/'); // Stocker les ID sous forme de chaîne séparée par des virgules
+      
 
         ?>
         
@@ -193,43 +184,8 @@ get_template_part('template_parts/photo_block');
 
 
 
-// ACTION AJAX : Charge le contenu d'un article unique
-function load_single_post_content() {
-    $post_id = $_POST['post_id'];
-
-    // WP_Query pour obtenir le contenu de l'article unique (single-post.php)
-    $args = array(
-        'post_type' => 'photos',
-        'p' => $post_id,
-    );
-
-    $query = new WP_Query($args);
-
-    if ($query->have_posts()) {
-        while ($query->have_posts()) {
-            $query->the_post();
-
-            // Vous pouvez afficher ici le contenu de l'article unique selon vos besoins
-            echo '<div class="single-post-content">';
-            echo '<h2>' . get_the_title() . '</h2>';
-            echo get_the_content();
-            echo '</div>';
-            
-        }
-        wp_reset_postdata();
-    } else {
-        echo 'Aucun contenu trouvé pour cet article.';
-    }
-
-    die();
-}
-
 // Ajoutez vos actions AJAX
 add_action('wp_ajax_filter_photos', 'filter_photos');
 add_action('wp_ajax_nopriv_filter_photos', 'filter_photos');
 add_action('wp_ajax_load_photos', 'load_photos');
 add_action('wp_ajax_nopriv_load_photos', 'load_photos');
-add_action('wp_ajax_load_single_post_content', 'load_single_post_content');
-add_action('wp_ajax_nopriv_load_single_post_content', 'load_single_post_content');
-
-
