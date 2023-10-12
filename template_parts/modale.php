@@ -1,4 +1,4 @@
-<!-- contact-modal.php -->
+<!-- Modal de contact -->
 
   <div class="modal-content">
     <span id="modalClose" class="close">&times;</span>

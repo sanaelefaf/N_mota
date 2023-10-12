@@ -14,9 +14,8 @@
             <!-- Icône de fermeture (à ajouter) -->
            
             <line x1="1" y1="1" x2="22" y2="22" stroke="#fff" stroke-width="2" />
-    <line x1="1" y1="22" x2="22" y2="1" stroke="#fff" stroke-width="2" />
-</svg>
-            
+           <line x1="1" y1="22" x2="22" y2="1" stroke="#fff" stroke-width="2" />
+        </svg>     
         </svg>
     </div>
     <div class="previous">
