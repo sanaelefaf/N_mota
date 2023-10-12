@@ -61,12 +61,12 @@ if (contactButton) {
  // Gestionnaire d'événements pour le bouton "Contact" sans référence
  if (modalNoRefButton) {
   modalNoRefButton.addEventListener("click", function () {
-    // Vous pouvez ajouter le comportement souhaité pour le bouton sans référence ici
+    
   });
  }
 
 
- // ajoutent des écouteurs d'événements "click" pour afficher ou masquer la fenêtre modale lorsque les éléments correspondants sont cliqués.
+ //écouteurs d'événements "click" pour afficher ou masquer la fenêtre modale lorsque les éléments correspondants sont cliqués.
   
 modalTrigger.addEventListener("click", function (event) {
    event.preventDefault();
@@ -154,7 +154,7 @@ jQuery(document).ready(function($) {
    });
  }
   
- 
+
   
   ////////////////////////////////// Afficher plus/////////////////////////////////////////////////
   
