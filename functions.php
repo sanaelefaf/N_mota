@@ -10,8 +10,8 @@ function theme_enqueue_styles() {
       wp_enqueue_script( 'custom-scripts', get_stylesheet_directory_uri() . '/script.js', array('jquery'), '1.0', true );
       wp_enqueue_script('lightbox-script', get_template_directory_uri() . '/custom.js/lightbox.js', array('jquery'), '1.0', true);
       wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
-    }
-    add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
+}
+add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
   
 
 
@@ -35,14 +35,21 @@ function nmota_add_admin_pages() {
 }
 add_action('admin_menu', 'nmota_add_admin_pages', 10);
 
+
+// Configuration des fonctionnalités du thème
 function montheme_supports() {
+     // Activation de la prise en charge des titres
     add_theme_support('title-tag');
+    // Activation de la prise en charge des images à la une
     add_theme_support('post-thumbnails');
+      // Activation de la prise en charge des menus
     add_theme_support('menus');
+
     add_theme_support('html5', array('search-form', 'comment-form', 'comment-list', 'gallery', 'caption'));
 }
 add_action('after_setup_theme', 'montheme_supports');
 
+//PARAMETRES THEME
 function nmota_settings_register() {
     register_setting('nmota_settings_fields', 'nmota_settings_fields', 'nmota_settings_fields_validate');
     add_settings_section('nmota_settings_section', __('Paramètres', 'nmota'), 'nmota_settings_section_introduction', 'nmota_settings_section');
@@ -59,6 +66,7 @@ function nmota_settings_field_introduction_output() {
     echo '<input name="nmota_settings_field_introduction" type="text" value="'.$value.'" />';
 }
 
+//RÉGLAGE GÉNÉRAUX//
 function nmota_theme_settings() {
     echo '<h1>'.esc_html(get_admin_page_title()).'</h1>';
     echo '<form action="options.php" method="post" name="nmota_settings">';
@@ -70,9 +78,11 @@ function nmota_theme_settings() {
     echo '</form>';
 }
 
+
 add_theme_support('post-thumbnails'); // Activation des images à la une
 add_post_type_support('page', 'excerpt'); // Activation des extraits pour les pages
 add_post_type_support('page', 'page-attributes'); // Activation des attributs de page
+
 
 // Inclusion du fichier des fonctions AJAX
 require get_template_directory() . '/custom/function-ajax.php'; 

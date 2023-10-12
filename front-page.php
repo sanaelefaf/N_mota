@@ -86,7 +86,6 @@
             'post_type' => 'photos',
             'posts_per_page' => 8,
             'paged' => $page,//page actuelle
-            'orderby' => 'rand', //aleatoire
            
    
         );
@@ -122,7 +121,7 @@
         }
 
         //  date de publication
-        $args['orderby'] = 'rand';
+        $args['orderby'] = 'date';
 
      //l'objet WP_Query qui est créé avec les arguments définis, prêt à exécuter la requête.
         $query = new WP_Query($args);
@@ -153,7 +152,7 @@
     
 
     <div id="load-more-container">
-        <button id="load-more">Afficher plus</button>
+        <button id="load-more">Charger plus</button>
     </div>
 </div>
     </main>
